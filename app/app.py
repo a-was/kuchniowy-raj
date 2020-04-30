@@ -1,6 +1,7 @@
 from flask import Flask
 
 from .config import Config
+from . import db
 
 __all__ = ['create_app']
 
@@ -10,6 +11,7 @@ def create_app():
 
     app.config.from_object(Config)
     init_blueprints(app)
+    db.init_app(app)
 
     return app
 

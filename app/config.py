@@ -2,6 +2,7 @@ class Config:
     SECRET_KEY = '|1XdY4<?Z^;nq"0JRi?$H=P2XlFo,d'
     DEBUG = True
     PASSWORD_REGEX = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?]).{8,16}$'  # Pa$$w0rd
+    DB_FILE = 'database.sqlite3'
 
 
 LOGGING_CONFIG = {
