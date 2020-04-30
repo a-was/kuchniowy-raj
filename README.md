@@ -1,15 +1,13 @@
 # kuchniowy-raj
 Projekt PPZ
 
-Wstępnie:  
-
-### Nieprzydzieleni:
-Król  
-Kuba
-
 ### Backend:
 Adam
+Król
 
 ### Frontend:
 Żywix  
 Pjoter
+
+### Dokumentacja/Prezentacja
+Kuba
