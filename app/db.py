@@ -12,9 +12,29 @@ def get_db():
 
 def close_db(exception):
     db = getattr(g, '_database', None)
-    if db:
+    if db is not None:
         db.close()
 
 
 def init_app(application):
     application.teardown_appcontext(close_db)
+
+
+def query_db(query, *args, one=False, commit=False):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute(query, args)
+    res = cursor.fetchall()
+    if commit:
+        db.commit()
+    return (res[0] if res else None) if one else res
+
+
+def exec_sql_file(filename):
+    with open(filename, 'r') as f:
+        sql = f.read()
+    for command in sql.split(';'):
+        try:
+            query_db(command, commit=True)
+        except sqlite3.OperationalError as e:
+            print('Command skipped: ', e)
