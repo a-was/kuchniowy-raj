@@ -2,9 +2,6 @@ class Config:
     DEBUG = True
     SECRET_KEY = '|1XdY4<?Z^;nq"0JRi?$H=P2XlFo,d'
 
-    EXEC_SQL = True
-    SQL_FILES = ['sql/create.sql', ]
-
     DB_FILE = 'database.sqlite3'
     PASSWORD_REGEX = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?]).{8,16}$'  # Pa$$w0rd
 

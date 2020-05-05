@@ -28,13 +28,3 @@ def query_db(query, *args, one=False, commit=False):
     if commit:
         db.commit()
     return (res[0] if res else None) if one else res
-
-
-def exec_sql_file(filename):
-    with open(filename, 'r') as f:
-        sql = f.read()
-    for command in sql.split(';'):
-        try:
-            query_db(command, commit=True)
-        except sqlite3.OperationalError as e:
-            print('Command skipped: ', e)
