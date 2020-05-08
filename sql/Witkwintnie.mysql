@@ -1,0 +1,66 @@
+CREATE TABLE `users` (
+  `user_id` integer PRIMARY KEY AUTO_INCREMENT,
+  `nick` text UNIQUE NOT NULL,
+  `mail` text UNIQUE NOT NULL,
+  `role_id` int NOT NULL,
+  `cooking_level_id` int,
+  `sex` text,
+  `password` text NOT NULL
+);
+
+CREATE TABLE `cooking_levels` (
+  `cooking_level_id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` text UNIQUE NOT NULL
+);
+
+CREATE TABLE `roles` (
+  `role_id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` text UNIQUE NOT NULL
+);
+
+CREATE TABLE `recipes` (
+  `recipe_id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int,
+  `type_of_food_id` int,
+  `category_id` int,
+  `name` text,
+  `description` text,
+  `rating` int,
+  `checked` boolean,
+  `time` int
+);
+
+CREATE TABLE `types_of_food` (
+  `type_of_food_id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` text
+);
+
+CREATE TABLE `categories` (
+  `category_id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` text
+);
+
+CREATE TABLE `recepies_ingredients` (
+  `recipe_id` int,
+  `ingredient_id` int,
+  `count` int
+);
+
+CREATE TABLE `ingredients` (
+  `ingredient_id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` text
+);
+
+ALTER TABLE `users` ADD FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`);
+
+ALTER TABLE `recipes` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+
+ALTER TABLE `users` ADD FOREIGN KEY (`cooking_level_id`) REFERENCES `cooking_levels` (`cooking_level_id`);
+
+ALTER TABLE `recipes` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+ALTER TABLE `recepies_ingredients` ADD FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`);
+
+ALTER TABLE `recipes` ADD FOREIGN KEY (`type_of_food_id`) REFERENCES `types_of_food` (`type_of_food_id`);
+
+ALTER TABLE `recepies_ingredients` ADD FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`ingredient_id`);
