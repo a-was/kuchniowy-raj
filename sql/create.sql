@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
 
 CREATE TABLE IF NOT EXISTS `recipes` (
   `recipe_id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `user_id` INTEGER NOT NULL,
+  `user_id` INTEGER,
   `type_of_food_id` INTEGER,
   `food_category_id` INTEGER,
   `name` TEXT UNIQUE NOT NULL,
