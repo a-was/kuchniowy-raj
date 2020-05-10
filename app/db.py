@@ -27,4 +27,8 @@ def query_db(query, *args, one=False, commit=False):
     res = cursor.fetchall()
     if commit:
         db.commit()
-    return (res[0] if res else None) if one else res
+
+    if res and one:
+        return res[0]
+    else:
+        return res
