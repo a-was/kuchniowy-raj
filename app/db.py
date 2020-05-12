@@ -1,17 +1,22 @@
 import sqlite3
 
-from flask import g, current_app
+from flask import g
+
+from .config import Config
+
+_DB_PROPERTY = '_database'
 
 
 def get_db():
-    db = getattr(g, '_database', None)
+    db = getattr(g, _DB_PROPERTY, None)
     if db is None:
-        db = g._database = sqlite3.connect(current_app.config['DB_FILE'])
+        db = sqlite3.connect(Config.DB_FILE)
+        setattr(g, _DB_PROPERTY, db)
     return db
 
 
 def close_db(exception):
-    db = getattr(g, '_database', None)
+    db = getattr(g, _DB_PROPERTY, None)
     if db is not None:
         db.close()
 

@@ -1,9 +1,14 @@
+from datetime import timedelta
+
+
 class Config:
     DEBUG = True
     SECRET_KEY = '|1XdY4<?Z^;nq"0JRi?$H=P2XlFo,d'
 
     DB_FILE = 'database.sqlite3'
     PASSWORD_REGEX = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?]).{8,16}$'  # Pa$$w0rd
+
+    PERMANENT_SESSION_LIFETIME = timedelta(hours=12)
 
 
 LOGGING_CONFIG = {
