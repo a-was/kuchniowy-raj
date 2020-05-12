@@ -7,8 +7,7 @@ app = Blueprint('main', __name__, template_folder='templates')
 
 @app.route('/')
 def index():
-    name = request.args.get('name', 'World')
-    return render_template('index.html', name=name)
+    return render_template('index.html', user=session.get('user'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -16,12 +15,10 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
 
-    username = request.form.get('username')
-    password = request.form.get('password')
+    username = request.form['username']
+    password = request.form['password']
     if f.authenticate_user(username, password):
-        session['user'] = {
-            'username': username
-        }
+        f.add_user_to_session(username)
         return redirect(url_for('index'))
     else:
         return render_template('login.html', err=True)
@@ -32,5 +29,6 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     rf = request.form
-    f.new_user(rf['nick'], rf['mail'], rf['cooking_level'], rf['sex'], rf['password'])
+    f.new_user(rf['username'], rf['mail'], rf['cooking_level'], rf['sex'], rf['password'])
+    f.add_user_to_session(rf['username'])
     return redirect(url_for('index'))

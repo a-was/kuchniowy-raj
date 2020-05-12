@@ -16,11 +16,8 @@ def login_required(f):
 
 
 def authenticate_user(username, password):
-    user_row = query_db("SELECT password FROM users WHERE nick = ?", username)
-    if user_row:
-        return check_password_hash(user_row[0], password)
-    else:
-        return None
+    user_row = query_db("SELECT password FROM users WHERE nick = ?", username, one=True)
+    return check_password_hash(user_row[0], password) if user_row else None
 
 
 def new_user(nick, mail, cooking_level, sex, password):
@@ -32,6 +29,13 @@ def new_user(nick, mail, cooking_level, sex, password):
         (SELECT cooking_level_id FROM cooking_levels WHERE name = ? )
     )
     """, nick, mail, generate_password_hash(password), sex, int(time()), cooking_level, commit=True)
+
+
+def add_user_to_session(username):
+    session.permanent = True
+    session['user'] = {
+        'username': username
+    }
 
 
 def get_all_recipes():
