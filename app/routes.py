@@ -29,6 +29,6 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     rf = request.form
-    f.new_user(rf['username'], rf['mail'], rf['cooking_level'], rf['sex'], rf['password'])
+    f.new_user(rf['username'], rf['password'], rf['sex'], rf['cooking_level'])
     f.add_user_to_session(rf['username'])
     return redirect(url_for('index'))

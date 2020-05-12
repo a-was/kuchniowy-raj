@@ -20,18 +20,20 @@ def authenticate_user(username, password):
     return check_password_hash(user_row[0], password) if user_row else None
 
 
-def new_user(nick, mail, cooking_level, sex, password):
-    from time import time
+def new_user(nick, password, sex, cooking_level):
     query_db("""
-    INSERT INTO users (nick, mail, password, sex, creation_timestamp, role_id, cooking_level_id) 
-    VALUES (?, ?, ?, ?, ?, 
-        (SELECT role_id FROM roles WHERE name LIKE 'user'), 
-        (SELECT cooking_level_id FROM cooking_levels WHERE name = ? )
-    )
-    """, nick, mail, generate_password_hash(password), sex, int(time()), cooking_level, commit=True)
+        INSERT INTO users (nick, password, sex, role_id, cooking_level_id) 
+        VALUES (?, ?, ?,
+            (SELECT role_id FROM roles WHERE name LIKE 'User'), 
+            (SELECT cooking_level_id FROM cooking_levels WHERE name = ? )
+        )
+    """, nick, generate_password_hash(password), sex, cooking_level, commit=True)
 
 
 def add_user_to_session(username):
+    query_db("UPDATE users SET last_login_date = DATETIME('now', 'localtime') WHERE nick = ?",
+             username, commit=True)
+
     session.permanent = True
     session['user'] = {
         'username': username
