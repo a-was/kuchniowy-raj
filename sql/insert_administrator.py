@@ -23,7 +23,7 @@ if password == getpass('Confirm password: '):
         (SELECT role_id FROM roles WHERE name LIKE 'Administrator') ) 
     """, (nick, generate_password_hash(password)))
     db.commit()
-    db.close()
     print('Administrator added')
 else:
     print('Passwords does not match!')
+db.close()
