@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `nick` TEXT UNIQUE NOT NULL,
+  `username` TEXT UNIQUE NOT NULL,
   `creation_date` DATE NOT NULL DEFAULT (DATETIME('now', 'localtime')),
   `last_login_date` DATE CHECK ( last_login_date >= creation_date ),
   `role_id` INTEGER NOT NULL,

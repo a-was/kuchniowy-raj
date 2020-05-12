@@ -32,3 +32,20 @@ def register():
     f.new_user(rf['username'], rf['password'], rf['sex'], rf['cooking_level'])
     f.add_user_to_session(rf['username'])
     return redirect(url_for('index'))
+
+
+@app.route('/user')
+@f.login_required
+def user():
+    return render_template('user.html')
+
+
+@app.route('/reset-password', methods=['GET', 'POST'])
+@f.login_required
+def reset_password():
+    if request.method == 'GET':
+        return render_template('register.html')
+
+    password = request.form['password']
+    f.change_password(session['user']['username'], password)
+    return redirect(url_for('user'))
