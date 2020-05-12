@@ -6,22 +6,22 @@ from werkzeug.security import generate_password_hash
 db = sqlite3.connect('../database.sqlite3')
 cursor = db.cursor()
 
-nick_checked = False
-while not nick_checked:
-    nick = input('Nick: ')
-    cursor.execute("SELECT nick FROM users WHERE nick LIKE ?", (nick, ))
+username_checked = False
+while not username_checked:
+    username = input('Nick: ')
+    cursor.execute("SELECT username FROM users WHERE username LIKE ?", (username, ))
     if cursor.fetchone():
-        print('This nick is taken, please pick another one')
+        print('This username is taken, please pick another one')
     else:
-        nick_checked = True
+        username_checked = True
 
 password = getpass('Password: ')
 if password == getpass('Confirm password: '):
     cursor.execute("""
-        INSERT INTO users (nick, password, role_id) 
+        INSERT INTO users (username, password, role_id) 
         VALUES (?, ?, 
         (SELECT role_id FROM roles WHERE name LIKE 'Administrator') ) 
-    """, (nick, generate_password_hash(password)))
+    """, (username, generate_password_hash(password)))
     db.commit()
     print('Administrator added')
 else:
