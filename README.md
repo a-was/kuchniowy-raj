@@ -6,19 +6,18 @@ Najlepiej uruchamiać w wirtualnym środowisku
 ```bash
 python3 -m venv venv
 source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 #### Wersja developerska
 ```bash
-python3 -m pip install -r requirements.txt
 python3 run.py
 ```
 
 #### Wersja produkcyjna
 ```bash
-python3 -m pip install -r requirements.txt
 gunicorn \
-    --bind localhost:5000 \
+    --bind localhost:8000 \
     --pid app.pid \
     --workers 2 \
     --daemon \
