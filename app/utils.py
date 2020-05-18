@@ -47,7 +47,8 @@ def add_user_to_session(username):
 
 
 def change_password(username, password):
-    query_db("UPDATE users SET password = ? WHERE username = ?", generate_password_hash(password), username, commit=True)
+    query_db("UPDATE users SET password = ? WHERE username = ?",
+             generate_password_hash(password), username, commit=True)
 
 
 def get_all_recipes():

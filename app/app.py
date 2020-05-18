@@ -11,8 +11,8 @@ def create_app():
     app.config.from_object(Config)
 
     init_regex_converter(app)
-    init_main_routes(app)
     init_extensions(app)
+    init_main_routes(app)
     init_blueprints(app)
 
     return app
