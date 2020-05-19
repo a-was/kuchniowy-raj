@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `cooking_levels` (
   `cooking_level_id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `name` TEXT UNIQUE NOT NULL
+  `name` TEXT UNIQUE NOT NULL,
+  `description` TEXT
 );
 
 CREATE TABLE IF NOT EXISTS `roles` (
