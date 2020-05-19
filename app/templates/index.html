@@ -1,10 +1,614 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Kuchniowy raj</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WITKWINTNIE!</title>
+  <link rel="stylesheet" href="bulma.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
+
 <body>
-    Hello {{ name }}!
+  <!--Header-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="image is-64x64" href="index.html">
+        <img src="/pictures/logo.png" width=auto height=auto>
+      </a>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+        data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a href="/index.html" class="navbar-item">
+          Strona główna
+        </a>
+
+        <a href="/o_nas.html" class="navbar-item">
+          O nas
+        </a>
+        <a href="/dodaj_przepis.html" class="navbar-item">
+          dodaj przepis
+          </a>
+        <a href="/administartor.html" class="navbar-item">
+          panel-administratora
+        </a>
+
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a href="/rejestracja.html" class="button is-primary">
+              <strong>Rejestracja</strong>
+            </a>
+            <a href="/logowanie.html" class="button is-light">
+              Logowanie
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!--obrazek do poprawki-->
+  <div class="image.is-128x128">
+    <img src="/pictures/tlo_index.png" />
+  </div>
+
+
+
+
+
+
+
+  <!--Ostatnie przepisy -->
+
+
+  <!--przepisy-->
+
+
+  <div class="columns">
+    <div class="column is-two-thirds">
+      <article class="panel is-primary">
+        <p class="panel-heading">
+          Przepisy
+        </p>
+        <!--poziom zaawansowania-->
+        <div class="panel-block">
+          <div class="tabs is-centered">
+            <ul>
+              <li class="is-active"><a>początkujący</a></li>
+              <li><a>podstawowy</a></li>
+              <li><a>średnio zaawansowany</a></li>
+              <li><a>mistrz kuchni</a></li>
+            </ul>
+          </div>
+        </div>
+        <!--textbox z szukaniem przepisów-->
+        <div class="panel-block">
+          <p class="control has-icons-left">
+            <input class="input is-primary" type="text" placeholder="Szukaj przepisu">
+            <span class="icon is-left">
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </span>
+          </p>
+        </div>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                 <i class="has-text-danger is-family-monospace"> Podstawowy </i>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <i class="has-text-danger is-family-monospace"> Mistrz kuchni </i>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <i class="has-text-danger is-family-monospace"> średnio zaawansowany </i>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+        <div class="column">
+
+
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          <a class="pagination-previous">Poprzednia</a>
+          <a class="pagination-next">Następna</a>
+          <ul class="pagination-list">
+            <li>
+              <a class="pagination-link" aria-label="Goto page 1">1</a>
+            </li>
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 10">10</a>
+            </li>
+            <li>
+              <a class="pagination-link is-current" aria-label="Page 11" aria-current="page">11</a>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 12">12</a>
+            </li>
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 13">13</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      </article>
+    </div>
+
+    <div class="column">
+
+      <article class="panel is-link">
+        <p class="panel-heading">
+          Przepis dnia
+        </p>
+        <div class="panel-block">
+          Codziennie inny losowy przepis....
+        </div>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-128x128">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+            <button class="button">pobierz</button>
+          </div>
+        </article>
+      </article>
+
+
+        <div class="column">
+          <br>
+        </div>
+
+
+<!--ostatnie przepisy-->
+
+
+      <article class="panel is-info">
+        <p class="panel-heading">
+          Ostatnie przepisy
+        </p>
+        <div class="panel-block">
+          <!--poziom zaawansowania-->
+        <div class="panel-block">
+          <div class="tabs is-centered">
+            <ul>
+              <li class="is-active"><a>początkujący</a></li>
+              <li><a>podstawowy</a></li>
+              <li><a>średnio zaawansowany</a></li>
+              <li><a>mistrz kuchni</a></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+          </div>
+        </article>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+          </div>
+        </article>
+
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+          </div>
+        </article>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+          </div>
+        </article>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+          </div>
+        </article>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-96x96">
+              <img src="/pictures/logo.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Pierogi Pani Jadzi</strong> <small>@pania_jadzia</small>
+                <br>
+                Pyszne pierogi z malinami na chłodne wieczory.
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <button class="button">podgląd</button>
+          </div>
+        </article>
+
+
+
+
+
+
+      </article>
+
+    </div>
+  </div>
+
+
+
+
+  <!--Stopka-->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>WITKWINTNIE DANIE</strong> by <a href="https://i.iplsc.com/-/0006C1TWAIMOJNNB-C324-F4.jpg">Kubuś
+          puchatek, </a><a
+          href="https://www.wykop.pl/cdn/c3201142/comment_qzB6b5YUz89smF4cZoRZuKuiu7jPzufN.jpg">Kłapouchy, </a>
+        Prosiaczek może być też z linkami do gita fb albo pornhuba.
+      <p>Projekt dostępny na,
+        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
+      <p>
+        <a class="image is-pulled-down" href="index.html">
+
+          <!--obrazek jest do poprawki aby był na środku-->
+          <img src="/pictures/logo.png" width="150" height="150">
+
+        </a>
+      </p>
+      </p>
+      </p>
+
+    </div>
+  </footer>
+
+<script>
+    let user = {{ session.user|tojson|safe }}
+    console.log(user)
+    function test_func(data) {
+        console.log(data);
+    }
+    test_func({{ session.user|tojson|safe }})
+</script>
 </body>
+
 </html>
