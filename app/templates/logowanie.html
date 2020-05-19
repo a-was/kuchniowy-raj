@@ -11,11 +11,11 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="image is-64x64" href="index.html"> <!--link do strony-->
-            <img src="pictures/logo.png" width=auto height=auto>    <!--potrzeba nam loga-->
+            <img src="/static/img/logo.png" width=auto height=auto>    <!--potrzeba nam loga-->
           </a>
-      
-          
-        
+
+
+
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -23,23 +23,23 @@
 
           </a>
         </div>
-        
+
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item"href="/index.html">
               Strona główna
             </a>
-      
+
             <a href="/o_nas.html"class="navbar-item" >
               O nas
             </a>
             <a href="/administartor.html" class="navbar-item">
                 panel-administratora
             </a>
-    
+
           </div>
-        
-      
+
+
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
@@ -49,8 +49,8 @@
                 <a href="/logowanie.html" class="button is-light">
                   Logowanie
                 </a>
-                
-                
+
+
               </div>
             </div>
           </div>
@@ -64,64 +64,19 @@
         <div class="container has-text-centered">
           <div class="columns is-centered">
             <div class="column is-5 is-4-desktop">
-              <form>
+              <form method="post">
                 <div class="field">
                   <div class="control">
-                    <input class="input" type="user_name" placeholder="Login">
+                    <input class="input" type="text" placeholder="Nazwa użytkownika" name="username">
                   </div>
                 </div>
-                <div class="field">
-                    <div class="control">
-                      <input class="input" type="email" placeholder="Email">
-                    </div>
-                  </div>
                 <div class="field">
                   <div class="control">
-                    <input class="input" type="password" placeholder="Hasło">
+                    <input class="input" type="password" placeholder="Hasło" name="password">
                   </div>
                 </div>
                 <div class="field">
-                    <div class="control">
-                      <input class="input" type="password" placeholder=" Powtórz Hasło">
-                    </div>
-                  </div>
-
-
-
-                  <div class="columns">
-                    <div class="column is-one-third">  
-                  <div class="field">
-                    <div class="control">
-                      <div class="select is-primary">
-                        <select>
-                          <option>mężczyzna</option>
-                          <option>kobieta</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="column"> 
-                  <div class="field">
-                    <div class="control">
-                      <div class="select is-primary">
-                        <select>
-                          <option>początkujący</option>
-                          <option>podstawowy</option>
-                          <option>średnio zaawansowany</option>
-                          <option>mistrz kuchni</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-
-
-                <div class="field">
-                  <button class="button is-primary is-fullwidth">Rejestruj, no już,ile mam czekać !</button>
+                    <input type="submit" class="button is-primary">
                 </div>
               </form>
             </div>

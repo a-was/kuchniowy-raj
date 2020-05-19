@@ -78,10 +78,9 @@
 
                             <div class="select is-primary">
                                 <select>
-                                    <option>początkujący</option>
-                                    <option>podstawowy</option>
-                                    <option>średnio zaawansowany</option>
-                                    <option>mistrz kuchni</option>
+                                    {% for level in cooking_levels %}
+                                        <option>{{ level.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>

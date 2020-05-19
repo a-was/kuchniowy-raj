@@ -11,7 +11,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="image is-64x64" href="index.html"> <!--link do strony-->
-            <img src="/pictures/logo.png" width=auto height=auto>    <!--potrzeba nam loga-->
+            <img src="pictures/logo.png" width=auto height=auto>    <!--potrzeba nam loga-->
           </a>
       
           
@@ -64,19 +64,64 @@
         <div class="container has-text-centered">
           <div class="columns is-centered">
             <div class="column is-5 is-4-desktop">
-              <form>
+              <form method="post">
                 <div class="field">
                   <div class="control">
-                    <input class="input" type="email" placeholder="Email">
+                    <input class="input" type="user_name" placeholder="Login">
                   </div>
                 </div>
+                <div class="field">
+                    <div class="control">
+                      <input class="input" type="email" placeholder="Email">
+                    </div>
+                  </div>
                 <div class="field">
                   <div class="control">
                     <input class="input" type="password" placeholder="Hasło">
                   </div>
                 </div>
                 <div class="field">
-                  <button class="button is-primary is-fullwidth">Loguj!</button>
+                    <div class="control">
+                      <input class="input" type="password" placeholder=" Powtórz Hasło">
+                    </div>
+                  </div>
+
+
+
+                  <div class="columns">
+                    <div class="column is-one-third">  
+                  <div class="field">
+                    <div class="control">
+                      <div class="select is-primary">
+                        <select>
+                          <option>mężczyzna</option>
+                          <option>kobieta</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column"> 
+                  <div class="field">
+                    <div class="control">
+                      <div class="select is-primary">
+                        <select>
+                          <option>początkujący</option>
+                          <option>podstawowy</option>
+                          <option>średnio zaawansowany</option>
+                          <option>mistrz kuchni</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+                <div class="field">
+                  <button class="button is-primary is-fullwidth">Rejestruj, no już,ile mam czekać !</button>
                 </div>
               </form>
             </div>
