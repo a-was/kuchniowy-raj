@@ -602,12 +602,14 @@
   </footer>
 
 <script>
+    {% if session.user %}
     let user = {{ session.user|tojson|safe }}
     console.log(user)
     function test_func(data) {
         console.log(data);
     }
     test_func({{ session.user|tojson|safe }})
+    {% endif %}
 </script>
 </body>
 
