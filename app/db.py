@@ -37,3 +37,19 @@ def query_db(query, *args, one=False, commit=False):
         return res[0]
     else:
         return res
+
+
+def query_db_object(query, *args, one=False, commit=False):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute(query, args)
+    r = []
+    for i in cursor.fetchall():
+        r.append(dict(zip([x[0] for x in cursor.description], i)))
+    if commit:
+        db.commit()
+
+    if r and one:
+        return r[0]
+    else:
+        return r

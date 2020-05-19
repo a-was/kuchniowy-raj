@@ -1,7 +1,7 @@
 from flask import session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from .db import query_db
+from .db import query_db, query_db_object
 
 
 def login_required(f):
@@ -33,17 +33,15 @@ def new_user(username, password, sex, cooking_level):
 def add_user_to_session(username):
     query_db("UPDATE users SET last_login_date = DATETIME('now', 'localtime') WHERE username = ?",
              username, commit=True)
-    row = query_db("""
-        SELECT r.name FROM users u  
+    row = query_db_object("""
+        SELECT u.username, r.name AS role_name, u.creation_date, u.last_login_date, u.sex
+        FROM users u  
         INNER JOIN roles r USING(role_id)
         WHERE username = ? 
     """, username, one=True)
 
     session.permanent = True
-    session['user'] = {
-        'username': username,
-        'role': row[0],
-    }
+    session['user'] = row
 
 
 def change_password(username, password):
@@ -51,5 +49,13 @@ def change_password(username, password):
              generate_password_hash(password), username, commit=True)
 
 
-def get_all_recipes():
+def get_recipes_list():
     pass
+
+
+def get_cooking_levels_list():
+    return query_db_object("SELECT name, description FROM cooking_levels")
+
+
+def get_food_categories_list():
+    return query_db_object("SELECT name FROM food_categories")
