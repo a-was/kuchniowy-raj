@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WITKWINTNIE!</title>
-  <link rel="stylesheet" href="bulma.css">
+  <link rel="stylesheet" href="/static/css/bulma.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
@@ -13,8 +13,8 @@
   <!--Header-->
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="image is-64x64" href="index.html">
-        <img src="/pictures/logo.png" width=auto height=auto>
+      <a class="image is-64x64">
+        <img src="/static/img/logo.png" width=auto height=auto>
       </a>
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
         data-target="navbarBasicExample">
@@ -26,30 +26,50 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a href="/index.html" class="navbar-item">
+        <a href="{{ url_for('main.index') }}" class="navbar-item">
           Strona główna
         </a>
 
-        <a href="/o_nas.html" class="navbar-item">
+        <a href="{{ url_for('main.about_us') }}" class="navbar-item">
           O nas
         </a>
-        <a href="/dodaj_przepis.html" class="navbar-item">
-          dodaj przepis
-          </a>
-        <a href="/administartor.html" class="navbar-item">
-          panel-administratora
-        </a>
+       
+         
 
       </div>
 
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a href="/rejestracja.html" class="button is-primary">
+
+
+            {% if session.user is defined %} 
+
+
+
+            <a href="{{ url_for('main.new_recipe') }}"class="button is-primary is-outlined">
+              Dodaj przepis
+            </a>
+            <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
+              Mój Profil
+            <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
+              wyloguj
+
+
+
+            {% else %}
+            
+            
+            <a href="{{ url_for('main.register') }}"class="button is-primary">
               <strong>Rejestracja</strong>
             </a>
-            <a href="/logowanie.html" class="button is-light">
+            <a href="{{ url_for('main.login') }}" class="button is-light">
               Logowanie
+            
+
+
+            {% endif %}
+            
             </a>
           </div>
         </div>
@@ -58,9 +78,10 @@
   </nav>
 
   <!--obrazek do poprawki-->
-  <div class="image.is-128x128">
-    <img src="/pictures/tlo_index.png" />
+  <div class="hero">
+    <img src="/static/img/tlo_index.png" />
   </div>
+
 
 
 
@@ -84,10 +105,9 @@
         <div class="panel-block">
           <div class="tabs is-centered">
             <ul>
-              <li class="is-active"><a>początkujący</a></li>
-              <li><a>podstawowy</a></li>
-              <li><a>średnio zaawansowany</a></li>
-              <li><a>mistrz kuchni</a></li>
+                {% for level in cooking_levels %}
+                <li><a>{{ level.name }}</a></li>
+            {% endfor %}
             </ul>
           </div>
         </div>
@@ -104,7 +124,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -133,7 +153,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -162,7 +182,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -191,7 +211,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -219,7 +239,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -247,7 +267,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -275,7 +295,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -303,7 +323,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -331,7 +351,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -402,7 +422,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-128x128">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -451,7 +471,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img//logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -470,7 +490,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -490,7 +510,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -509,7 +529,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -528,7 +548,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -547,7 +567,7 @@
         <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
-              <img src="/pictures/logo.png">
+              <img src="/static/img/logo.png">
             </p>
           </figure>
           <div class="media-content">
@@ -587,30 +607,13 @@
         Prosiaczek może być też z linkami do gita fb albo pornhuba.
       <p>Projekt dostępny na,
         <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
-      <p>
-        <a class="image is-pulled-down" href="index.html">
-
-          <!--obrazek jest do poprawki aby był na środku-->
-          <img src="/pictures/logo.png" width="150" height="150">
-
-        </a>
-      </p>
       </p>
       </p>
 
     </div>
   </footer>
 
-<script>
-    {% if session.user %}
-    let user = {{ session.user|tojson|safe }}
-    console.log(user)
-    function test_func(data) {
-        console.log(data);
-    }
-    test_func({{ session.user|tojson|safe }})
-    {% endif %}
-</script>
+
 </body>
 
 </html>

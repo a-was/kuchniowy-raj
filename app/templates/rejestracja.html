@@ -4,38 +4,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WITKWINTNIE!</title>
-    <link rel="stylesheet" href="bulma.css">
+    <link rel="stylesheet" href="/static/css/bulma.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
   </head>
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="image is-64x64" href="index.html"> <!--link do strony-->
-            <img src="pictures/logo.png" width=auto height=auto>    <!--potrzeba nam loga-->
-          </a>
-      
-          
-        
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
 
-          </a>
-        </div>
+      <div class="navbar-brand">
+        <a class="image is-64x64">
+          <img src="/static/img/logo.png" width=auto height=auto>
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
         
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item"href="/index.html">
+            <a href="{{ url_for('main.index') }}" class="navbar-item">
               Strona główna
             </a>
-      
-            <a href="/o_nas.html"class="navbar-item" >
+    
+            <a href="{{ url_for('main.about_us') }}" class="navbar-item">
               O nas
             </a>
-            <a href="/administartor.html" class="navbar-item">
-                panel-administratora
-            </a>
+           
     
           </div>
         
@@ -43,14 +40,13 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <a href="/rejestracja.html" class="button is-primary">
+
+                <a href="{{ url_for('main.register') }}"class="button is-primary">
                   <strong>Rejestracja</strong>
                 </a>
-                <a href="/logowanie.html" class="button is-light">
+                <a href="{{ url_for('main.login') }}" class="button is-light">
                   Logowanie
                 </a>
-                
-                
               </div>
             </div>
           </div>
@@ -64,38 +60,114 @@
         <div class="container has-text-centered">
           <div class="columns is-centered">
             <div class="column is-5 is-4-desktop">
+
               <form method="post">
+
+
+                {% if msg %}
                 <div class="field">
                   <div class="control">
-                    <input class="input" type="user_name" placeholder="Login">
+                    {{msg.text}}
                   </div>
                 </div>
-                <div class="field">
-                    <div class="control">
-                      <input class="input" type="email" placeholder="Email">
-                    </div>
-                  </div>
+                {% endif %}
+
+
+
                 <div class="field">
                   <div class="control">
-                    <input class="input" type="password" placeholder="Hasło">
+                    <input class="input" type="test" placeholder="Login" name="username">
                   </div>
                 </div>
+
+
+                <!--   
                 <div class="field">
                     <div class="control">
-                      <input class="input" type="password" placeholder=" Powtórz Hasło">
+                      <input class="input" type="email" placeholder="Email" name="">
                     </div>
                   </div>
+
+                -->
+
+
+                <div class="field">
+                  <div class="control">
+                    <p class="control has-icons-left">
+                    <input class="input" type="password" placeholder="Hasło" name="password1">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </p>
+                  </div>
+                </div>
+                <progress class="progress is-primary" value="15" max="100">30%</progress>
+                <div class="field">
+                    <div class="control">
+                      <p class="control has-icons-left">
+                      <input class="input" type="password" placeholder=" Powtórz Hasło" name="password2">
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                      </span>
+                    </p>
+                    </div>
+                  </div>
+
+                  
+
+
+
+                  <script type="text/javascript"
+                  var calculateComplexity = function (password) {
+                    var complexity = 0;
+                    
+                    var regExps = [ 
+                      /[a-z]/,
+                      /[A-Z]/,
+                      /[0-9]/,
+                      /.{8}/,
+                      /.{16}/,
+                      /[!-//:-@[-`{-ÿ]/
+                    ];
+                    
+                    regExps.forEach(function (regexp) {
+                      if (regexp.test(password)) {
+                        complexity++;
+                      }
+                    });
+                    
+                    return {
+                      value: complexity,
+                      max: regExps.length
+                    };
+                  };
+                   
+                  var checkPasswordStregth = function (password) {
+                    var progress = document.querySelector('#passwordComplexity'),
+                        complexity = calculateComplexity(this.value); 
+                    
+                    progress.value = complexity.value;
+                    progress.max = complexity.max;
+                  };
+                  
+                  var input = document.querySelector('#passwordField');
+                  input.addEventListener('keyup', checkPasswordStregth);></script>
+
+
+
+                  
+
 
 
 
                   <div class="columns">
-                    <div class="column is-one-third">  
+                    <div class="column">  
                   <div class="field">
                     <div class="control">
                       <div class="select is-primary">
-                        <select>
-                          <option>mężczyzna</option>
-                          <option>kobieta</option>
+                        <select name="sex">
+                          <option value="M">Mężczyzna</option>
+                          <option name="F">Kobieta</option>
                         </select>
                       </div>
                     </div>
@@ -105,11 +177,10 @@
                   <div class="field">
                     <div class="control">
                       <div class="select is-primary">
-                        <select>
-                          <option>początkujący</option>
-                          <option>podstawowy</option>
-                          <option>średnio zaawansowany</option>
-                          <option>mistrz kuchni</option>
+                        <select name="cooking_level">
+                          {% for level in cooking_level_id %}
+                          <option>{{ level.name }}</option>
+                          {% endfor %}
                         </select>
                       </div>
                     </div>
@@ -119,9 +190,8 @@
 
 
 
-
                 <div class="field">
-                  <button class="button is-primary is-fullwidth">Rejestruj, no już,ile mam czekać !</button>
+                  <button class="button is-primary is-fullwidth">Zarejestruj</button>
                 </div>
               </form>
             </div>
