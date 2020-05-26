@@ -51,9 +51,12 @@ def register():
             add_user_to_session(user_login)
             return redirect(url_for('.index'))
         else:
-            return render_template('rejestracja.html', msg=error_message('Podane hasła nie są takie same'))
+            return render_template('rejestracja.html',
+                                   msg=error_message('Podane hasła nie są takie same'),
+                                   cooking_levels=cl.get_cooking_levels())
     else:
-        return render_template('rejestracja.html', msg=error_message('Ta nazwa użytkownika jest już zajęta'),
+        return render_template('rejestracja.html',
+                               msg=error_message('Ta nazwa użytkownika jest już zajęta'),
                                cooking_levels=cl.get_cooking_levels())
 
 
