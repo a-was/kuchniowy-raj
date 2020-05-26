@@ -1,14 +1,15 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 
-from . import utils as f
-from .utils import login_required
+from .utils.messages import info_message, success_message, warning_message, error_message
+from .utils.sessions import login_required, admin_required, add_user_to_session
+from .utils import users as u
+from .utils import cooking_levels as cl
 
 app = Blueprint('main', __name__, template_folder='templates')
 
 
 @app.route('/')
 def index():
-    print(session.get('user'))
     return render_template('index.html')
 
 
@@ -19,11 +20,11 @@ def login():
 
     username = request.form.get('username')
     password = request.form.get('password')
-    if f.authenticate_user(username, password):
-        f.add_user_to_session(username)
+    if u.authenticate_user(username, password):
+        add_user_to_session(username)
         return redirect(url_for('.index'))
     else:
-        return render_template('logowanie.html', err=True)
+        return render_template('logowanie.html', msg=error_message('Podano błędny login i/lub hasło'))
 
 
 @app.route('/wyloguj')
@@ -36,11 +37,24 @@ def logout():
 @app.route('/rejestracja', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template('rejestracja.html', cooking_levels=f.get_cooking_levels_list())
-    rf = request.form
-    f.new_user(rf['username'], rf['password'], rf['sex'], rf['cooking_level'])
-    f.add_user_to_session(rf['username'])
-    return redirect(url_for('.index'))
+        return render_template('rejestracja.html', cooking_levels=cl.get_cooking_levels())
+
+    user_login = request.form.get('username')
+    user_sex = request.form.get('sex')
+    user_cooking_level = request.form.get('cooking_level')
+    user_password1 = request.form.get('password1')
+    user_password2 = request.form.get('password2')
+
+    if not u.exists(user_login):
+        if u.validate_passwords(user_password1, user_password2):
+            u.new_user(user_login, user_password1, user_sex, user_cooking_level)
+            add_user_to_session(user_login)
+            return redirect(url_for('.index'))
+        else:
+            return render_template('rejestracja.html', msg=error_message('Podane hasła nie są takie same'))
+    else:
+        return render_template('rejestracja.html', msg=error_message('Ta nazwa użytkownika jest już zajęta'),
+                               cooking_levels=cl.get_cooking_levels())
 
 
 @app.route('/profil')
@@ -61,6 +75,7 @@ def user_profile():
 
 @app.route('/admin')
 @login_required
+@admin_required
 def admin():
     return render_template('administrator.html')
 
