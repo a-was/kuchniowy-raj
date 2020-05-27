@@ -38,11 +38,35 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
+    
+    
+                {% if session.user is defined %} 
+    
+    
+    
+                <a href="{{ url_for('main.new_recipe') }}"class="button is-primary is-outlined">
+                  Dodaj przepis
+                </a>
+                <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
+                  Mój Profil
+                <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
+                  wyloguj
+    
+    
+    
+                {% else %}
+                
+                
                 <a href="{{ url_for('main.register') }}"class="button is-primary">
                   <strong>Rejestracja</strong>
                 </a>
                 <a href="{{ url_for('main.login') }}" class="button is-light">
                   Logowanie
+                
+    
+    
+                {% endif %}
+                
                 </a>
               </div>
             </div>
@@ -66,13 +90,14 @@
       <footer class="footer">
         <div class="content has-text-centered">
           <p>
-            <strong>WITKWINTNIE DANIE</strong> by <a href="https://i.iplsc.com/-/0006C1TWAIMOJNNB-C324-F4.jpg">Kubuś puchatek, </a><a href="https://www.wykop.pl/cdn/c3201142/comment_qzB6b5YUz89smF4cZoRZuKuiu7jPzufN.jpg">Kłapouchy, </a> może być też z linkami do gita fb albo pornhuba.
-
+            <strong>WITKWINTNIE DANIE</strong> 
+            <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+          </br>
             <p>Projekt dostępny na,     
             <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>. 
             </p>
           </p>
         </div>
-      </footer> 
+      </footer>  
   </body>
 </html>
