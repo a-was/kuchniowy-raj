@@ -78,57 +78,45 @@
           <form method="post">
 
 
-            
+
             <div class="field">
               <div class="control">
-                <input class="input is-primary is-medium" type="text" placeholder="Nazwa Przepisu" name="name">
-              </div>
-            </div> <div class="field">
-              <div class="control">
-                <input class="input is-info" type="text" placeholder="Krótki opis" name="name">
+                <input class="input is-primary is-medium" type="text" placeholder="Nazwa Przepisu" name="przepis">
               </div>
             </div>
-            
-            <textarea class="textarea" placeholder="Podaj potrzebne skłądniki po przecinku (np.'mleko, jajka, mąka' "></textarea>
-            <textarea class="textarea" placeholder="Podaj przepis jak przyrządzić twoje danie" rows="10"></textarea>
-            
-
-
-
-
 
             <div class="columns">
-              <div class="column">
-                <div class="field">
-                  <div class="control">
-                    <div class="select is-primary">
-                      <select name="cooking_level">
-                        {% for level in cooking_levels %}
-                        <option>{{ level.name }}</option>
-                        {% endfor %}
-                      </select> 
-                    </div>
+              <div class="column is-half">
+                  <div class="select is-primary">
+                    <select name="cooking_level " required>
+                      <option>obiad</option>
+                      <option>śniadanie</option>
+                    </select>
                   </div>
-                  <div class="file has-name">
-                    <label class="file-label">
-                      <input class="file-input" type="file" name="resume">
-                      <span class="file-cta">
-                        <span class="file-icon">
-                          <i class="fas fa-upload"></i>
-                        </span>
-                        <span class="file-label">
-                          Choose a file…
-                        </span>
-                      </span>
-                      <span class="file-name">
-                        Screen Shot 2017-07-29 at 15.54.25.png
-                      </span>
-                    </label>
+              </div>
+              <div class="column is-half">
+                  <div class="select is-primary">
+                    <select name="cooking_level " required>
+                      <option>ciasto</option>
+                      <option>zupa</option>
+                      <option>Kanapki</option>
+                    </select>
                   </div>
                 </div>
               </div>
-            </div>
 
+            <div class="field">
+              <div class="control">
+                <input class="input is-small" type="text" placeholder="Czas przygotowania (w minutach)." name="przepis" required>
+              </div>
+            </div>
+            
+
+
+            <textarea class="textarea" placeholder="Podaj przepis jak przyrządzić twoje danie" rows="10"></textarea>
+
+
+          </br>
 
 
 
@@ -145,19 +133,14 @@
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <strong>WITKWINTNIE DANIE</strong> by <a href="https://i.iplsc.com/-/0006C1TWAIMOJNNB-C324-F4.jpg">Kubuś
-          puchatek, </a><a
-          href="https://www.wykop.pl/cdn/c3201142/comment_qzB6b5YUz89smF4cZoRZuKuiu7jPzufN.jpg">Kłapouchy, </a>
-        Prosiaczek może być też z linkami do gita fb albo pornhuba.
-      <p>Projekt dostępny na,
-        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
+        <strong>WITKWINTNIE DANIE</strong> 
+        <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+      </br>
+        <p>Projekt dostępny na,     
+        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>. 
+        </p>
       </p>
-      </p>
-
     </div>
-  </footer>
-
-
+  </footer> 
 </body>
-
 </html>
