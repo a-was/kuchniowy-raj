@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 
 from .utils.messages import info_message, success_message, warning_message, error_message
-from .utils.sessions import login_required, admin_required, add_user_to_session
+from .utils.sessions import login_required, admin_required, add_user_to_session, get_user_id
 from .utils import users as u
+from .utils import recipies as r
 from .utils import cooking_levels as cl
+from .utils import food_categories as fc
+from .utils import types_of_food as tof
 
 app = Blueprint('main', __name__, template_folder='templates')
 
@@ -83,9 +86,37 @@ def admin():
     return render_template('administrator.html')
 
 
-@app.route('/dodaj-przepis')
+@app.route('/dodaj-przepis', methods=['GET', 'POST'])
+@login_required
 def new_recipe():
-    return render_template('dodaj_przepis.html')
+    food_categories = fc.get_food_categories_list()
+    types_of_food = tof.get_types_of_food_list()
+
+    if request.method == 'GET':
+        return render_template('dodaj_przepis.html',
+                               food_categories=food_categories,
+                               types_of_food=types_of_food)
+
+    recipe_name = request.form.get('name')
+    recipe_type = request.form.get('type')
+    recipe_food_category = request.form.get('category')
+    recipe_description = request.form.get('description')
+    recipe_time_required = request.form.get('time')
+    # recipe_level = request.form.get('cooking_level')
+
+    if r.recipe_exists(recipe_name):
+        return render_template('dodaj_przepis.html',
+                               msg=error_message('Przepis o takiej nazwie już instnieje'),
+                               food_categories=food_categories,
+                               types_of_food=types_of_food)
+
+    r.new_recipe(get_user_id(), recipe_name, recipe_type, recipe_food_category, recipe_description,
+                 recipe_time_required)
+    return render_template('dodaj_przepis.html',
+                           msg=success_message('Przepis pomyślnie dodano, '
+                                               'czeka on na zatwierdzenie przez administratora'),
+                           food_categories=food_categories,
+                           types_of_food=types_of_food)
 
 
 @app.route('/o-nas')

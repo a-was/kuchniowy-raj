@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app.db import query_db, query_db_object
 from app.config import Config
+from app.db import query_db
 
 
 def validate_passwords(p1, p2):
@@ -18,7 +18,7 @@ def authenticate_user(username, password):
 
 
 def exists(username):
-    res = query_db("SELECT COUNT(*) FROM users WHERE username = %s", username, one=True)
+    res = query_db("SELECT COUNT(*) FROM users WHERE username = ?", username, one=True)
     return True if res[0] > 0 else False
 
 
