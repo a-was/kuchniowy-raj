@@ -1,3 +1,5 @@
+import re
+
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.config import Config
@@ -5,11 +7,14 @@ from app.db import query_db
 
 
 def validate_passwords(p1, p2):
-    import re
     if p1 != p2 or not re.fullmatch(Config.PASSWORD_REGEX, p1):
         return False
     else:
         return True
+
+
+def validate_username(username):
+    return True if re.fullmatch(Config.USERNAME_REGEX, username) else False
 
 
 def authenticate_user(username, password):
