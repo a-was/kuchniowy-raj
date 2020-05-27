@@ -76,7 +76,7 @@
 
                 <div class="field">
                   <div class="control">
-                    <input class="input" type="test" placeholder="Login" name="username">
+                    <input class="input" type="test" placeholder="Login" name="username" required>
                   </div>
                 </div>
 
@@ -94,7 +94,7 @@
                 <div class="field">
                   <div class="control">
                     <p class="control has-icons-left">
-                    <input class="input" type="password" placeholder="Hasło" name="password1">
+                    <input class="input" type="password" placeholder="Hasło" name="password1" required>
                     <span class="icon is-small is-left">
                       <i class="fas fa-lock"></i>
                     </span>
@@ -105,7 +105,7 @@
                 <div class="field">
                     <div class="control">
                       <p class="control has-icons-left">
-                      <input class="input" type="password" placeholder=" Powtórz Hasło" name="password2">
+                      <input class="input" type="password" placeholder=" Powtórz Hasło" name="password2" required>
                       <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                       </span>
@@ -165,7 +165,7 @@
                   <div class="field">
                     <div class="control">
                       <div class="select is-primary">
-                        <select name="sex">
+                        <select name="sex" required>
                           <option value="M">Mężczyzna</option>
                           <option name="F">Kobieta</option>
                         </select>
@@ -177,7 +177,7 @@
                   <div class="field">
                     <div class="control">
                       <div class="select is-primary">
-                        <select name="cooking_level">
+                        <select name="cooking_level " required>
                           {% for level in cooking_levels %}
                           <option value="{{ level.cooking_level_id }}">{{ level.name }}</option>
                           {% endfor %}
@@ -206,8 +206,9 @@
       <footer class="footer">
         <div class="content has-text-centered">
           <p>
-            <strong>WITKWINTNIE DANIE</strong> by <a href="https://i.iplsc.com/-/0006C1TWAIMOJNNB-C324-F4.jpg">Kubuś puchatek, </a><a href="https://www.wykop.pl/cdn/c3201142/comment_qzB6b5YUz89smF4cZoRZuKuiu7jPzufN.jpg">Kłapouchy, </a> może być też z linkami do gita fb albo pornhuba.
-
+            <strong>WITKWINTNIE DANIE</strong> 
+            <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+          </br>
             <p>Projekt dostępny na,     
             <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>. 
             </p>
