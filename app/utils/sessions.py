@@ -16,7 +16,7 @@ def login_required(f):
 
 def admin_required(f):
     def decorator(*args, **kwargs):
-        if session['user']['role_name'] == 'administrator':
+        if session['user']['role_name'].lower() == 'administrator':
             return f(*args, **kwargs)
         else:
             return redirect(url_for('.index'))
