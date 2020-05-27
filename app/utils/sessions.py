@@ -29,7 +29,7 @@ def add_user_to_session(username):
     query_db("UPDATE users SET last_login_date = DATETIME('now', 'localtime') WHERE username = ?",
              username, commit=True)
     row = query_db_object("""
-        SELECT u.username, r.name AS role_name, u.creation_date, u.last_login_date, u.sex
+        SELECT u.user_id, u.username, r.name AS role_name, u.creation_date, u.last_login_date, u.sex
         FROM users u  
         INNER JOIN roles r USING(role_id)
         WHERE username = ? 
@@ -37,3 +37,13 @@ def add_user_to_session(username):
 
     session.permanent = True
     session['user'] = row
+
+
+def get_user_id():
+    user = session.get('user')
+    return user['user_id'] if user else None
+
+
+def get_user_name():
+    user = session.get('user')
+    return user['username'] if user else None
