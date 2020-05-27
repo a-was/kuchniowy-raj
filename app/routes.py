@@ -48,19 +48,24 @@ def register():
     user_password1 = request.form.get('password1')
     user_password2 = request.form.get('password2')
 
-    if not u.exists(user_login):
-        if u.validate_passwords(user_password1, user_password2):
-            u.new_user(user_login, user_password1, user_sex, user_cooking_level)
-            add_user_to_session(user_login)
-            return redirect(url_for('.index'))
-        else:
-            return render_template('rejestracja.html',
-                                   msg=error_message('Podane hasła nie są takie same'),
-                                   cooking_levels=cl.get_cooking_levels())
-    else:
+    if u.exists(user_login):
         return render_template('rejestracja.html',
                                msg=error_message('Ta nazwa użytkownika jest już zajęta'),
                                cooking_levels=cl.get_cooking_levels())
+
+    if user_password1 != user_password2:
+        return render_template('rejestracja.html',
+                               msg=error_message('Podane hasła nie są takie same'),
+                               cooking_levels=cl.get_cooking_levels())
+
+    if not u.validate_passwords(user_password1, user_password2):
+        return render_template('rejestracja.html',
+                               msg=error_message('Podane hasła nie spełniają wymogów bezpieczeństwa'),
+                               cooking_levels=cl.get_cooking_levels())
+
+    u.new_user(user_login, user_password1, user_sex, user_cooking_level)
+    add_user_to_session(user_login)
+    return redirect(url_for('.index'))
 
 
 @app.route('/profil')
