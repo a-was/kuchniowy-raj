@@ -3,12 +3,12 @@
       var complexity = 0;
       
       var regExps = [ 
-        /[a-z]/,
-        /[A-Z]/,
-        /[0-9]/,
-        /.{8}/,
-        /.{16}/,
-        /[!-//:-@[-`{-ÿ]/
+        /[a-z]/
+        /[A-Z]/
+        /[0-9]/
+        /.{8}/
+        /.{16}/
+    
       ];
       
       regExps.forEach(function (regexp) {
@@ -24,12 +24,12 @@
     };
      
     var checkPasswordStregth = function (password) {
-      var progress = document.querySelector('#passwordComplexity'),
+      var progress = document.querySelector('#password1'),
           complexity = calculateComplexity(this.value); 
       
       progress.value = complexity.value;
       progress.max = complexity.max;
     };
     
-    var input = document.querySelector('#passwordField');
+    var input = document.querySelector('#password1');
     input.addEventListener('keyup', checkPasswordStregth);
