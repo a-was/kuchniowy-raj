@@ -178,8 +178,8 @@
                     <div class="control">
                       <div class="select is-primary">
                         <select name="cooking_level">
-                          {% for level in cooking_level_id %}
-                          <option>{{ level.name }}</option>
+                          {% for level in cooking_levels %}
+                          <option value="{{ level.cooking_level_id }}">{{ level.name }}</option>
                           {% endfor %}
                         </select>
                       </div>
