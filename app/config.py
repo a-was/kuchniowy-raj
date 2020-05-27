@@ -6,6 +6,7 @@ class Config:
     SECRET_KEY = '|1XdY4<?Z^;nq"0JRi?$H=P2XlFo,d'
 
     DB_FILE = 'database.sqlite3'
+    USERNAME_REGEX = r'[a-zA-Z0-9]{4,12}'
     PASSWORD_REGEX = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?]).{8,16}$'  # Pa$$w0rd
 
     PERMANENT_SESSION_LIFETIME = timedelta(hours=12)

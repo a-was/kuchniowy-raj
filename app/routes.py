@@ -53,6 +53,12 @@ def register():
                                msg=error_message('Ta nazwa użytkownika jest już zajęta'),
                                cooking_levels=cl.get_cooking_levels())
 
+    if not u.validate_username(user_login):
+        return render_template('rejestracja.html',
+                               msg=error_message('Nazwa użytkownika może składać się jedynie z liter i cyfr, '
+                                                 'od 4 do 12 znaków'),
+                               cooking_levels=cl.get_cooking_levels())
+
     if user_password1 != user_password2:
         return render_template('rejestracja.html',
                                msg=error_message('Podane hasła nie są takie same'),
