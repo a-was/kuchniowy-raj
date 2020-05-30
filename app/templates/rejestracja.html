@@ -98,7 +98,7 @@
               <div class="control">
                 <label class="label">Podaj hasło. Pamiętaj o sile hasła!</label>
                 <p class="control has-icons-left">
-                  <input class="input" type="password" placeholder="Hasło" name="password1" id="password" required>
+                  <input class="input" type="password" placeholder="mała litera, duża litera, cyfra, znak specialny" name="password1" id="passwordField" required>
                   <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                   </span>
@@ -106,57 +106,50 @@
               </div>
             </div>
 
-            <div> 
-              <input class="input" type="text" id="test12" />
-            </div>
+
             <script>
 
-$(document).ready(function () {
+              $(document).ready(function () {
 
-              function scorePassword(pass) {
-                var wynik = 0;
-                var warianty = {
-                  cyfry: /\d/.test(pass),
-                  male: /[a-z]/.test(pass),
-                  duze: /[A-Z]/.test(pass),
-                  specjalne: /\W/.test(pass),
-                  dlugosc: pass.length > 7
+                var calculateComplexity = function (password) {
+                  var complexity = 0;
+                  var regExps = [
+                    /[a-z]/,
+                    /[A-Z]/,
+                    /[0-9]/,
+                    /.{8}/,
+                    /[!-//:-@[-`{-ÿ]/
+                  ];
+
+                  regExps.forEach(function (regexp) {
+                    if (regexp.test(password)) {
+                      complexity++;
+                    }
+                  });
+
+                  return {
+                    value: complexity,
+                    max: regExps.length
+                  };
                 };
-                for (var war in warianty)
-                  if (warianty[war] == true) wynik += 100 / 5;
 
-                var color = '';
+                var checkPasswordStregth = function (password) {
+                  var progress = document.querySelector('#passwordComplexity'),
+                    complexity = calculateComplexity(this.value);
 
-                if (wynik < 50) color = 'red';
-                else if (wynik > 50 && wynik < 100) color = 'yellow';
-                else if (wynik == 100) color = 'green';
-                $("#strength_score").text(wynik + '%');
-                $("#strength_score").css('background-color', color);
-                return parseInt(wynik);
+                  progress.value = complexity.value;
+                  progress.max = complexity.max;
+                };
+
+                var input = document.querySelector('#passwordField');
+                input.addEventListener('keyup', checkPasswordStregth);
+
               }
-
-              $(function () {
-                $("#test12").on("keypress keyup keydown", function () {
-                  scorePassword($(this).val());
-                });
-              });
-
-
-            });
+              )
             </script>
 
 
-
-            <div id="strength_score" value="0">0%</div>
-
-
-
-
-
-
-
-
-
+            <progress class="progress is-primary" id="passwordComplexity" value="10" max="100">15%</progress>
 
 
             <div class="field">
@@ -171,19 +164,7 @@ $(document).ready(function () {
               </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
             <div class="columns">
               <div class="column">
                 <div class="field">
