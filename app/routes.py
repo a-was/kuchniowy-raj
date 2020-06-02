@@ -13,7 +13,9 @@ app = Blueprint('main', __name__, template_folder='templates')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html',
+                           recipes=r.get_recipes_list(True),
+                           daily_recipe=r.get_daily_recipe())
 
 
 @app.route('/logowanie', methods=['GET', 'POST'])
@@ -111,13 +113,13 @@ def new_recipe():
     recipe_name = request.form.get('name')
     recipe_type = request.form.get('type')
     recipe_food_category = request.form.get('category')
-    recipe_description = request.form.get('description')
     recipe_time_required = request.form.get('time')
+    recipe_description = request.form.get('description')
     # recipe_level = request.form.get('cooking_level')
 
     if r.recipe_exists(recipe_name):
         return render_template('dodaj_przepis.html',
-                               msg=error_message('Przepis o takiej nazwie już instnieje'),
+                               msg=error_message('Przepis o takiej nazwie już istnieje'),
                                food_categories=food_categories,
                                types_of_food=types_of_food)
 

@@ -11,6 +11,8 @@ class Config:
 
     PERMANENT_SESSION_LIFETIME = timedelta(hours=12)
 
+    DAILY_RECIPE_FILE = 'app/static/cache/daily_recipe.cache'
+
 
 LOGGING_CONFIG = {
     'version': 1,

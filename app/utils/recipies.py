@@ -1,3 +1,8 @@
+import pickle
+import random
+from datetime import datetime
+
+from app.config import Config
 from app.db import query_db, query_db_object
 
 
@@ -19,6 +24,35 @@ def get_recipes_list(checked=None):
         return query_db_object(sql + " WHERE checked = 1")
     else:
         return query_db_object(sql + " WHERE checked = 0")
+
+
+def get_daily_recipe():
+    changed = False
+    try:
+        d = read_daily_file()
+        if d['date'] != datetime.now().date():
+            changed = True
+            write_daily_file()
+    except (FileNotFoundError, EOFError):
+        changed = True
+        write_daily_file()
+
+    return read_daily_file()['recipe'] if changed else d['recipe']
+
+
+def write_daily_file():
+    d = {
+        'date': datetime.now().date(),  # year, month, day
+        'recipe': random.choice(get_recipes_list(True))
+    }
+    with open(Config.DAILY_RECIPE_FILE, 'wb') as f:
+        pickle.dump(d, f)
+
+
+def read_daily_file():
+    with open(Config.DAILY_RECIPE_FILE, 'rb') as f:
+        loaded = pickle.load(f)
+    return loaded
 
 
 def recipe_exists(name):
