@@ -60,7 +60,9 @@ def register():
     user_password2 = request.form.get('password2')
 
     if any(v is None for v in [user_login, user_sex, user_cooking_level, user_password1, user_password2]):
-        return render_template('rejestracja.html', msg=error_message('Nie wypełniono wszystkich pól'))
+        return render_template('rejestracja.html',
+                               msg=error_message('Nie wypełniono wszystkich pól'),
+                               cooking_levels=cl.get_cooking_levels())
 
     if u.exists(user_login):
         return render_template('rejestracja.html',
