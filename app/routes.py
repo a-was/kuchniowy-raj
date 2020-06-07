@@ -80,11 +80,12 @@ def register():
 
     if not u.validate_passwords(user_password1, user_password2):
         return render_template('rejestracja.html',
-                               msg=error_message('Podane hasła nie spełniają wymogów bezpieczeństwa'),
+                               msg=error_message('Podane hasło nie spełnia wymogów bezpieczeństwa'),
                                cooking_levels=cl.get_cooking_levels())
 
     u.new_user(user_login, user_password1, user_sex, user_cooking_level)
     add_user_to_session(user_login)
+    # return redirect(url_for('.index', recipes=r.get_recipes_list(True), daily_recipe=r.get_daily_recipe()))
     return redirect(url_for('.index'))
 
 
