@@ -13,9 +13,7 @@ app = Blueprint('main', __name__, template_folder='templates')
 
 @app.route('/')
 def index():
-    return render_template('index.html',
-                           recipes=r.get_recipes_list(True),
-                           daily_recipe=r.get_daily_recipe())
+    return render_template('index.html', recipes=r.get_recipes_list(True), daily_recipe=r.get_daily_recipe())
 
 
 @app.route('/o-nas')
@@ -50,8 +48,9 @@ def logout():
 
 @app.route('/rejestracja', methods=['GET', 'POST'])
 def register():
+    cooking_levels = cl.get_cooking_levels()
     if request.method == 'GET':
-        return render_template('rejestracja.html', cooking_levels=cl.get_cooking_levels())
+        return render_template('rejestracja.html', cooking_levels=cooking_levels)
 
     user_login = request.form.get('username')
     user_sex = request.form.get('sex')
@@ -62,28 +61,28 @@ def register():
     if any(v is None for v in [user_login, user_sex, user_cooking_level, user_password1, user_password2]):
         return render_template('rejestracja.html',
                                msg=error_message('Nie wypełniono wszystkich pól'),
-                               cooking_levels=cl.get_cooking_levels())
+                               cooking_levels=cooking_levels)
 
     if u.exists(user_login):
         return render_template('rejestracja.html',
                                msg=error_message('Ta nazwa użytkownika jest już zajęta'),
-                               cooking_levels=cl.get_cooking_levels())
+                               cooking_levels=cooking_levels)
 
     if not u.validate_username(user_login):
+        msg = 'Nazwa użytkownika może składać się jedynie z liter i cyfr, od 4 do 12 znaków'
         return render_template('rejestracja.html',
-                               msg=error_message('Nazwa użytkownika może składać się jedynie z liter i cyfr, '
-                                                 'od 4 do 12 znaków'),
-                               cooking_levels=cl.get_cooking_levels())
+                               msg=error_message(msg),
+                               cooking_levels=cooking_levels)
 
     if user_password1 != user_password2:
         return render_template('rejestracja.html',
                                msg=error_message('Podane hasła nie są takie same'),
-                               cooking_levels=cl.get_cooking_levels())
+                               cooking_levels=cooking_levels)
 
     if not u.validate_passwords(user_password1, user_password2):
         return render_template('rejestracja.html',
                                msg=error_message('Podane hasło nie spełnia wymogów bezpieczeństwa'),
-                               cooking_levels=cl.get_cooking_levels())
+                               cooking_levels=cooking_levels)
 
     u.new_user(user_login, user_password1, user_sex, user_cooking_level)
     add_user_to_session(user_login)
@@ -108,8 +107,7 @@ def user_profile():
                                msg=error_message('Podane hasła nie są takie same'))
 
     if not u.validate_passwords(new_password1, new_password2):
-        return render_template('profil.html',
-                               msg=error_message('Podane hasło nie spełnia wymogów bezpieczeństwa'))
+        return render_template('profil.html', msg=error_message('Podane hasło nie spełnia wymogów bezpieczeństwa'))
     return render_template('profil.html', msg=success_message('Hasło zaktualizowane'))
 
 
@@ -150,7 +148,10 @@ def new_recipe():
 
     if any(v is None for v in [recipe_name, recipe_type, recipe_food_category, recipe_time_required,
                                recipe_description]):
-        return render_template('dodaj_przepis.html', msg=error_message('Nie wypełniono wszystkich pól'))
+        return render_template('dodaj_przepis.html',
+                               msg=error_message('Nie wypełniono wszystkich pól'),
+                               food_categories=food_categories,
+                               types_of_food=types_of_food)
 
     if r.recipe_exists(recipe_name):
         return render_template('dodaj_przepis.html',
@@ -166,9 +167,9 @@ def new_recipe():
 
     r.new_recipe(get_user_id(), recipe_name, recipe_type, recipe_food_category, recipe_description,
                  recipe_time_required)
+    msg = 'Przepis pomyślnie dodano, czeka on na zatwierdzenie przez administratora'
     return render_template('dodaj_przepis.html',
-                           msg=success_message('Przepis pomyślnie dodano, '
-                                               'czeka on na zatwierdzenie przez administratora'),
+                           msg=success_message(msg),
                            food_categories=food_categories,
                            types_of_food=types_of_food)
 
