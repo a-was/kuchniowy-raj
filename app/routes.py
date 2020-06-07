@@ -89,10 +89,26 @@ def register():
     return redirect(url_for('.index'))
 
 
-@app.route('/profil')
+@app.route('/profil', methods=['GET', 'POST'])
 @login_required
 def user_profile():
-    return render_template('profil.html')
+    if request.method == 'GET':
+        return render_template('profil.html')
+
+    new_password1 = request.form.get('password1')
+    new_password2 = request.form.get('password2')
+
+    if any(v is None for v in [new_password1, new_password2]):
+        return render_template('profil.html', msg=error_message('Nie wypełniono wszystkich pól'))
+
+    if new_password1 != new_password2:
+        return render_template('profil.html',
+                               msg=error_message('Podane hasła nie są takie same'))
+
+    if not u.validate_passwords(new_password1, new_password2):
+        return render_template('profil.html',
+                               msg=error_message('Podane hasło nie spełnia wymogów bezpieczeństwa'))
+    return render_template('profil.html', msg=success_message('Hasło zaktualizowane'))
 
 
 # @app.route('/reset-password', methods=['GET', 'POST'])
