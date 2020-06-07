@@ -18,6 +18,11 @@ def index():
                            daily_recipe=r.get_daily_recipe())
 
 
+@app.route('/o-nas')
+def about_us():
+    return render_template('/o_nas.html')
+
+
 @app.route('/logowanie', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -149,6 +154,6 @@ def new_recipe():
                            types_of_food=types_of_food)
 
 
-@app.route('/o-nas')
-def about_us():
-    return render_template('/o_nas.html')
+@app.route('/przepis/<int:recipe_id>')
+def get_recipe(recipe_id):
+    return render_template('przepis.html', recipe=r.get_recipe(recipe_id))

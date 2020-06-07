@@ -26,6 +26,21 @@ def get_recipes_list(checked=None):
         return query_db_object(sql + " WHERE checked = 0")
 
 
+def get_recipe(recipe_id):
+    return query_db_object("""
+        SELECT r.recipe_id, 
+            r.user_id, u.username, 
+            r.type_of_food_id, tf.name AS type_of_food, 
+            r.food_category_id, fc.name AS food_category, 
+            r.name, r.creation_date, r.description, r.rating, r.checked, r.time_required, r.views
+        FROM recipes r
+        INNER JOIN users u USING(user_id)
+        INNER JOIN types_of_food tf USING(type_of_food_id)
+        INNER JOIN food_categories fc USING(food_category_id)
+        WHERE r.recipe_id = ?
+    """, recipe_id, one=True)
+
+
 def get_daily_recipe():
     changed = False
     try:
