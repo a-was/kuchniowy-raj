@@ -173,4 +173,5 @@ def new_recipe():
 
 @app.route('/przepis/<int:recipe_id>')
 def get_recipe(recipe_id):
+    r.add_view(recipe_id)
     return render_template('przepis.html', recipe=r.get_recipe(recipe_id))

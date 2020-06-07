@@ -6,6 +6,11 @@ from app.config import Config
 from app.db import query_db, query_db_object
 
 
+def recipe_exists(name):
+    res = query_db("SELECT COUNT(*) FROM recipes WHERE name = ?", name, one=True)
+    return True if res[0] > 0 else False
+
+
 def get_recipes_list(checked=None):
     sql = """
         SELECT r.recipe_id, 
@@ -41,20 +46,18 @@ def get_recipe(recipe_id):
     """, recipe_id, one=True)
 
 
-def get_daily_recipe():
-    changed = False
-    try:
-        d = read_daily_file()
-        if d['date'] != datetime.now().date():
-            changed = True
-            write_daily_file()
-    except (FileNotFoundError, EOFError):
-        changed = True
-        write_daily_file()
-
-    return read_daily_file()['recipe'] if changed else d['recipe']
+def new_recipe(user_id, name, type_of_food, food_category, description, time):
+    query_db("""
+        INSERT INTO recipes (user_id, type_of_food_id, food_category_id, name, description, time_required)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, user_id, type_of_food, food_category, name, description, time, commit=True)
 
 
+def add_view(recipe_id):
+    query_db("UPDATE recipes SET views = views + 1 WHERE recipe_id = ?", recipe_id, commit=True)
+
+
+# daily
 def write_daily_file():
     d = {
         'date': datetime.now().date(),  # year, month, day
@@ -70,13 +73,15 @@ def read_daily_file():
     return loaded
 
 
-def recipe_exists(name):
-    res = query_db("SELECT COUNT(*) FROM recipes WHERE name = ?", name, one=True)
-    return True if res[0] > 0 else False
+def get_daily_recipe():
+    changed = False
+    try:
+        d = read_daily_file()
+        if d['date'] != datetime.now().date():
+            changed = True
+            write_daily_file()
+    except (FileNotFoundError, EOFError):
+        changed = True
+        write_daily_file()
 
-
-def new_recipe(user_id, name, type_of_food, food_category, description, time):
-    query_db("""
-        INSERT INTO recipes (user_id, type_of_food_id, food_category_id, name, description, time_required)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, user_id, type_of_food, food_category, name, description, time, commit=True)
+    return read_daily_file()['recipe'] if changed else d['recipe']
