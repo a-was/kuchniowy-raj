@@ -25,6 +25,10 @@ def login():
 
     username = request.form.get('username')
     password = request.form.get('password')
+
+    if any(v is None for v in [username, password]):
+        return render_template('logowanie.html', msg=error_message('Nie wypełniono wszystkich pól'))
+
     if u.authenticate_user(username, password):
         add_user_to_session(username)
         return redirect(url_for('.index'))
@@ -49,6 +53,9 @@ def register():
     user_cooking_level = request.form.get('cooking_level')
     user_password1 = request.form.get('password1')
     user_password2 = request.form.get('password2')
+
+    if any(v is None for v in [user_login, user_sex, user_cooking_level, user_password1, user_password2]):
+        return render_template('rejestracja.html', msg=error_message('Nie wypełniono wszystkich pól'))
 
     if u.exists(user_login):
         return render_template('rejestracja.html',
@@ -117,9 +124,19 @@ def new_recipe():
     recipe_description = request.form.get('description')
     # recipe_level = request.form.get('cooking_level')
 
+    if any(v is None for v in [recipe_name, recipe_type, recipe_food_category, recipe_time_required,
+                               recipe_description]):
+        return render_template('dodaj_przepis.html', msg=error_message('Nie wypełniono wszystkich pól'))
+
     if r.recipe_exists(recipe_name):
         return render_template('dodaj_przepis.html',
                                msg=error_message('Przepis o takiej nazwie już istnieje'),
+                               food_categories=food_categories,
+                               types_of_food=types_of_food)
+
+    if len(recipe_description) < 50 or len(recipe_description) > 500:
+        return render_template('dodaj_przepis.html',
+                               msg=error_message('Opis powinien mieć od 50 do 500 znaków'),
                                food_categories=food_categories,
                                types_of_food=types_of_food)
 
