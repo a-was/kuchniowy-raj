@@ -172,7 +172,7 @@
                     <div class="select is-primary">
                       <select name="sex" required>
                         <option value="M">Mężczyzna</option>
-                        <option name="F">Kobieta</option>
+                        <option value="F">Kobieta</option>
                       </select>
                     </div>
                   </div>
@@ -182,7 +182,7 @@
                 <div class="field">
                   <div class="control">
                     <div class="select is-primary">
-                      <select name="cooking_level " required>
+                      <select name="cooking_level" required>
                         {% for level in cooking_levels %}
                         <option value="{{ level.cooking_level_id }}">{{ level.name }}</option>
                         {% endfor %}

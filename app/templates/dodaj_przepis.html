@@ -76,30 +76,35 @@
       <div class="columns is-centered">
         <div class="column is-5 is-4-desktop">
           <form method="post">
-
-
-
+            {% if msg %}
             <div class="field">
               <div class="control">
-                <input class="input is-primary is-medium" type="text" placeholder="Nazwa Przepisu" name="przepis">
+                {{msg.text}}
+              </div>
+            </div>
+            {% endif %}
+            <div class="field">
+              <div class="control">
+                <input class="input is-primary is-medium" type="text" placeholder="Nazwa Przepisu" name="name" required>
               </div>
             </div>
 
             <div class="columns">
               <div class="column is-half">
-                  <div class="select is-primary">
-                    <select name="cooking_level " required>
-                      <option>obiad</option>
-                      <option>śniadanie</option>
+                  <div class="select is-primary"> 
+                    <select name="type" >
+                      {% for type in types_of_food %}
+                      <option value="{{ type.types_of_food_id }}">{{ type.name }}</option>
+                      {% endfor %}
                     </select>
                   </div>
               </div>
               <div class="column is-half">
                   <div class="select is-primary">
-                    <select name="cooking_level " required>
-                      <option>ciasto</option>
-                      <option>zupa</option>
-                      <option>Kanapki</option>
+                    <select name="category" >
+                      {% for category in food_categories %}
+                      <option value="{{ category.food_categories_id }}">{{ category.name }}</option>
+                      {% endfor %}
                     </select>
                   </div>
                 </div>
@@ -107,13 +112,13 @@
 
             <div class="field">
               <div class="control">
-                <input class="input is-small" type="text" placeholder="Czas przygotowania (w minutach)." name="przepis" required>
+                <input class="input is-small" type="text" placeholder="Czas przygotowania (w minutach)." name="time" required>
               </div>
             </div>
             
 
 
-            <textarea class="textarea" placeholder="Podaj przepis jak przyrządzić twoje danie" rows="10"></textarea>
+            <textarea class="textarea" placeholder="Podaj przepis jak przyrządzić twoje danie" rows="10" name="description"></textarea>
 
 
           </br>
