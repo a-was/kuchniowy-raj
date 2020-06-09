@@ -103,8 +103,7 @@ def user_profile():
         return render_template('profil.html', msg=error_message('Nie wypełniono wszystkich pól'))
 
     if new_password1 != new_password2:
-        return render_template('profil.html',
-                               msg=error_message('Podane hasła nie są takie same'))
+        return render_template('profil.html', msg=error_message('Podane hasła nie są takie same'))
 
     if not u.validate_passwords(new_password1, new_password2):
         return render_template('profil.html', msg=error_message('Podane hasło nie spełnia wymogów bezpieczeństwa'))
@@ -125,7 +124,9 @@ def user_profile():
 @login_required
 @admin_required
 def admin():
-    return render_template('administrator.html')
+    return render_template('administrator.html',
+                           recipes_to_check=r.get_recipes_list(False),
+                           users=u.get_all_users())
 
 
 @app.route('/dodaj-przepis', methods=['GET', 'POST'])

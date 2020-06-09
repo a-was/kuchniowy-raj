@@ -3,7 +3,7 @@ import re
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.config import Config
-from app.db import query_db
+from app.db import query_db, query_db_object
 
 
 def validate_passwords(p1, p2):
@@ -40,3 +40,15 @@ def new_user(username, password, sex, cooking_level):
 def change_password(username, password):
     query_db("UPDATE users SET password = ? WHERE username = ?",
              generate_password_hash(password), username, commit=True)
+
+
+def get_all_users():
+    return query_db_object("""
+        SELECT u.user_id, u.username, u.creation_date, u.last_login_date, 
+            u.role_id, r.name AS role,
+            u.cooking_level_id, cl.name AS cooking_level,
+            u.sex
+        FROM users u
+        INNER JOIN roles r USING (role_id)
+        INNER JOIN cooking_levels cl USING (cooking_level_id) 
+    """)
