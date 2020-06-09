@@ -7,11 +7,9 @@
   <title>WITKWINTNIE!</title>
   <link rel="stylesheet" href="/static/css/bulma.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-  <!--Header-->
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="image is-64x64">
@@ -36,8 +34,8 @@
         </a>
 
 
-
       </div>
+
 
       <div class="navbar-end">
         <div class="navbar-item">
@@ -82,86 +80,12 @@
     </div>
   </nav>
 
-  <section class="section">
-    <div class="container has-text-centered">
-      <div class="columns is-centered">
-        <div class="column is-5 is-4-desktop">
-          <form method="post">
 
 
-            {% if msg %}
-            <div class="field">
-              <div class="control">
-                {{msg.text}}
-              </div>
-            </div>
-            {% endif %}
 
-
-            <div class="field">
-              <div class="control">
-                <label class="label">Podaj nowe hasło.</label>
-                <input class="input" type="password" placeholder="Nowe hasło" name="password1" id="passwordField"
-                  required>
-              </div>
-            </div>
-            <progress class="progress is-primary" id="passwordComplexity" value="10" max="100">15%</progress>
-            <div class="field">
-              <div class="control">
-                <label class="label">Podaj ponownie nowe hasło.</label>
-                <input class="input" type="password" placeholder="Nowe hasło" name="password2" required>
-              </div>
-              </br>
-              <div class="field">
-                <button class="button is-primary is-fullwidth">Prześlij</button>
-              </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <script>
-
-    $(document).ready(function () {
-
-      var calculateComplexity = function (password) {
-        var complexity = 0;
-        var regExps = [
-          /[a-z]/,
-          /[A-Z]/,
-          /[0-9]/,
-          /.{8}/,
-          /[!-//:-@[-`{-ÿ]/
-        ];
-
-        regExps.forEach(function (regexp) {
-          if (regexp.test(password)) {
-            complexity++;
-          }
-        });
-
-        return {
-          value: complexity,
-          max: regExps.length
-        };
-      };
-
-      var checkPasswordStregth = function (password) {
-        var progress = document.querySelector('#passwordComplexity'),
-          complexity = calculateComplexity(this.value);
-
-        progress.value = complexity.value;
-        progress.max = complexity.max;
-      };
-
-      var input = document.querySelector('#passwordField');
-      input.addEventListener('keyup', checkPasswordStregth);
-
-    }
-    )
-  </script>
+  <div class="mage.is-128x128">
+    <img src="/static/img/strona_w_budowie.jpg" alt="test">
+  </div>
 
 
 
@@ -169,7 +93,6 @@
 
 
 
-  <!--Stopka-->
   <footer class="footer">
     <div class="content has-text-centered">
       <p>

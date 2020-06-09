@@ -44,7 +44,12 @@
 
 
             {% if session.user is defined %} 
-
+            
+            {% if session.user.role_name == "Administrator" %}
+            <a href="{{ url_for('main.admin') }}"class="button is-success is-outlined">
+              Panel Administratora
+            </a>
+            {% endif %}
 
 
             <a href="{{ url_for('main.new_recipe') }}"class="button is-primary is-outlined">
@@ -52,26 +57,28 @@
             </a>
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
               Mój Profil
+            </a>
             <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
               wyloguj
-
-
+            </a>
+              
+             
             {% else %}
-
-
-
-
+            
             <a href="{{ url_for('main.register') }}"class="button is-primary">
               <strong>Rejestracja</strong>
             </a>
             <a href="{{ url_for('main.login') }}" class="button is-light">
               Logowanie
-            
+            </a>
+              
+              
+              
 
 
             {% endif %}
             
-            </a>
+
           </div>
         </div>
       </div>
