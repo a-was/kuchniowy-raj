@@ -80,12 +80,46 @@
     </div>
   </nav>
 
-
-
-
-  <div class="mage.is-128x128">
-    <img src="/static/img/strona_w_budowie.jpg" alt="test">
+  <section class="section">
+    <div class="columns is-centered">
+      <div class="control">
+        <div class="select is-primary">
+          <select name="recipes_to_check" required>
+            {% for recipe in recipes_to_check %}
+            
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <section class="section">
+    <div class="columns is-centered">
+      <div class="column is-5 is-4-desktop">
+          <div class="field">
+                  <div class="control">
+                    <label class="label">Czy chcesz akceptować przepis?</label>
+                  </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="container has-text-centered">
+      <div class="columns is-centered">
+        
+        
+        
+
+            <div class="buttons">
+            <button class="button is-success">Akceptuj przepis</button>
+            <button class="button is-danger">Odrzuć przepis</button>
+            </div>
+      </div>      
+    </div>
+  </section>
+  
+
 
 
 
