@@ -160,9 +160,9 @@ def new_recipe():
                                food_categories=food_categories,
                                types_of_food=types_of_food)
 
-    if len(recipe_description) < 50 or len(recipe_description) > 500:
+    if len(recipe_description) < 50 or len(recipe_description) > 5000:
         return render_template('dodaj_przepis.html',
-                               msg=error_message('Opis powinien mieć od 50 do 500 znaków'),
+                               msg=error_message('Opis powinien mieć od 50 do 5000 znaków'),
                                food_categories=food_categories,
                                types_of_food=types_of_food)
 

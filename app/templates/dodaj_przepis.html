@@ -101,7 +101,7 @@
                   <div class="select is-primary"> 
                     <select name="type" >
                       {% for type in types_of_food %}
-                      <option value="{{ type.types_of_food_id }}">{{ type.name }}</option>
+                      <option value="{{ type.type_of_food_id }}">{{ type.name }}</option>
                       {% endfor %}
                     </select>
                   </div>
@@ -110,7 +110,7 @@
                   <div class="select is-primary">
                     <select name="category" >
                       {% for category in food_categories %}
-                      <option value="{{ category.food_categories_id }}">{{ category.name }}</option>
+                      <option value="{{ category.food_category_id }}">{{ category.name }}</option>
                       {% endfor %}
                     </select>
                   </div>
