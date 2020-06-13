@@ -120,7 +120,7 @@
           <div class="media-content recipe">
             <div class="content">
                 <p>
-                    <strong>{{ recipe.name }}</strong> <small>@{{ recipe.username }}</small>
+                    <a href="/przepis/{{ recipe.recipe_id }}" style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
                 <br>
                 {{ recipe.description | truncate(50) }}
                 </p>
