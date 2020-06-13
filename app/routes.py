@@ -179,3 +179,17 @@ def new_recipe():
 def get_recipe(recipe_id):
     r.add_view(recipe_id)
     return render_template('przepis.html', recipe=r.get_recipe(recipe_id))
+
+
+@app.route('/przepis/<int:recipe_id>/akceptuj')
+@admin_required
+def accept_recipe(recipe_id):
+    r.accept_recipe(recipe_id)
+    return redirect(url_for('.admin'))
+
+
+@app.route('/przepis/<int:recipe_id>/odrzuc')
+@admin_required
+def delete_recipe(recipe_id):
+    r.delete_recipe(recipe_id)
+    return redirect(url_for('.admin'))

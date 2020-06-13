@@ -23,12 +23,12 @@ def get_recipes_list(checked=None):
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
     """
-    if checked is None:
-        return query_db_object(sql)
-    elif checked is True:
+    if checked is True:
         return query_db_object(sql + " WHERE checked = 1")
-    else:
+    elif checked is False:
         return query_db_object(sql + " WHERE checked = 0")
+    else:
+        return query_db_object(sql)
 
 
 def get_recipe(recipe_id):
@@ -55,6 +55,14 @@ def new_recipe(user_id, name, type_of_food, food_category, description, time):
 
 def add_view(recipe_id):
     query_db("UPDATE recipes SET views = views + 1 WHERE recipe_id = ?", recipe_id, commit=True)
+
+
+def accept_recipe(recipe_id):
+    query_db("UPDATE recipes SET checked = 1 WHERE recipe_id = ?", recipe_id, commit=True)
+
+
+def delete_recipe(recipe_id):
+    query_db("DELETE FROM recipes WHERE recipe_id = ?", recipe_id, commit=True)
 
 
 # daily

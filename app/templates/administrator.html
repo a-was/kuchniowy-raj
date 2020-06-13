@@ -7,6 +7,14 @@
   <title>WITKWINTNIE!</title>
   <link rel="stylesheet" href="/static/css/bulma.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+            overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
 </head>
 
 <body>
@@ -56,7 +64,7 @@
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
               Mój Profil
               <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
-                wyloguj
+                Wyloguj
 
 
 
@@ -68,10 +76,7 @@
                 </a>
                 <a href="{{ url_for('main.login') }}" class="button is-light">
                   Logowanie
-
-
-
-                  {% endif %}
+                {% endif %}
 
                 </a>
           </div>
@@ -83,47 +88,48 @@
   <section class="section">
     <div class="columns is-centered">
       <div class="control">
-        <div class="select is-primary">
-          <select name="recipes_to_check" required>
-            {% for recipe in recipes_to_check %}
-            
-            {% endfor %}
-          </select>
-        </div>
+      {% if recipes_to_check %}
+        <table class="tg">
+          <thead>
+          <tr>
+              <th class="tg-0lax">Id przepisu</th>
+              <th class="tg-0lax">Id użytkownika</th>
+              <th class="tg-0lax">Nazwa użytkownika</th>
+              <th class="tg-0lax">Nazwa przepisu</th>
+              <th class="tg-0lax"><span style="font-weight:400;font-style:normal">Typ</span></th>
+              <th class="tg-0lax"><span style="font-weight:400;font-style:normal">Kategoria</span></th>
+              <th class="tg-0lax">Wymagany czas</th>
+              <th class="tg-0lax">Opis przygotowania</th>
+              <th class="tg-0lax"><span style="font-weight:400;font-style:normal">Data utworzenia</span></th>
+              <th class="tg-0lax">Zatwierdzić?</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for recipe in recipes_to_check %}
+              <tr>
+              <td class="tg-0lax">{{ recipe.recipe_id }}</td>
+              <td class="tg-0lax">{{ recipe.user_id }}</td>
+              <td class="tg-0lax">{{ recipe.username }}</td>
+              <td class="tg-0lax">{{ recipe.name }}</td>
+              <td class="tg-0lax">{{ recipe.type_of_food }}</td>
+              <td class="tg-0lax">{{ recipe.food_category }}</td>
+              <td class="tg-0lax">{{ recipe.time_required }}</td>
+              <td class="tg-0lax">{{ recipe.description }}</td>
+              <td class="tg-0lax">{{ recipe.creation_date }}</td>
+              <td class="tg-0lax">
+                  <a class="button is-success is-small" href="{{ url_for('main.accept_recipe', recipe_id=recipe.recipe_id) }}">Akceptuj przepis</a>
+                  <a class="button is-danger is-small" href="{{ url_for('main.delete_recipe', recipe_id=recipe.recipe_id) }}">Odrzuć przepis</a>
+              </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+      {% else %}
+          <p>Brak przepisów do zatwierdzenia</p>
+      {% endif %}
       </div>
     </div>
   </div>
-
-  <section class="section">
-    <div class="columns is-centered">
-      <div class="column is-5 is-4-desktop">
-          <div class="field">
-                  <div class="control">
-                    <label class="label">Czy chcesz akceptować przepis?</label>
-                  </div>
-          </div>
-      </div>
-    </div>
-
-    <div class="container has-text-centered">
-      <div class="columns is-centered">
-        
-        
-        
-
-            <div class="buttons">
-            <button class="button is-success">Akceptuj przepis</button>
-            <button class="button is-danger">Odrzuć przepis</button>
-            </div>
-      </div>      
-    </div>
-  </section>
-  
-
-
-
-
-
 
 
 

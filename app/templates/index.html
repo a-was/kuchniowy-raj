@@ -120,7 +120,7 @@
           <div class="media-content recipe">
             <div class="content">
                 <p>
-                    <a href="/przepis/{{ recipe.recipe_id }}" style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
+                    <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}" style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
                 <br>
                 {{ recipe.description | truncate(50) }}
                 </p>
@@ -135,7 +135,7 @@
             </nav>
           </div>
           <div class="media-right">
-            <a class="button" href="/przepis/{{ recipe.recipe_id }}">Podgląd</a>
+            <a class="button" href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}">Podgląd</a>
             <!-- <button class="button">Pobierz</button> -->
           </div>
           </article>
@@ -162,14 +162,14 @@
           <div class="media-content">
             <div class="content">
               <p>
-                <strong>{{ daily_recipe.name }}</strong> <small>@{{ daily_recipe.username }}</small>
+                  <a href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}" style="color: inherit"><strong>{{ daily_recipe.name }}</strong></a> <small>@{{ daily_recipe.username }}</small>
                 <br>
                   {{ daily_recipe.description | truncate(25) }}
               </p>
             </div>
           </div>
           <div class="media-right">
-            <a class="button" href="/przepis/{{ daily_recipe.recipe_id }}">Podgląd</a>
+            <a class="button" href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}">Podgląd</a>
             <!-- <button class="button">Pobierz</button> -->
           </div>
         </article>
