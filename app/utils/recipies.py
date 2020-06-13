@@ -11,6 +11,11 @@ def recipe_exists(name):
     return True if res[0] > 0 else False
 
 
+def recipe_checked(recipe_id):
+    res = query_db("SELECT checked FROM recipes WHERE recipe_id = ?", recipe_id, one=True)
+    return True if res and res[0] == 1 else False
+
+
 def get_recipes_list(checked=None):
     sql = """
         SELECT r.recipe_id, 

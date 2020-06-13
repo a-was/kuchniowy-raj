@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, abort
 
 from .utils.messages import info_message, success_message, warning_message, error_message
 from .utils.sessions import login_required, admin_required, add_user_to_session, get_user_id
@@ -177,11 +177,15 @@ def new_recipe():
 
 @app.route('/przepis/<int:recipe_id>')
 def get_recipe(recipe_id):
-    r.add_view(recipe_id)
-    return render_template('przepis.html', recipe=r.get_recipe(recipe_id))
+    if r.recipe_checked(recipe_id):
+        r.add_view(recipe_id)
+        return render_template('przepis.html', recipe=r.get_recipe(recipe_id))
+    else:
+        abort(404)
 
 
 @app.route('/przepis/<int:recipe_id>/akceptuj')
+@login_required
 @admin_required
 def accept_recipe(recipe_id):
     r.accept_recipe(recipe_id)
@@ -189,6 +193,7 @@ def accept_recipe(recipe_id):
 
 
 @app.route('/przepis/<int:recipe_id>/odrzuc')
+@login_required
 @admin_required
 def delete_recipe(recipe_id):
     r.delete_recipe(recipe_id)
