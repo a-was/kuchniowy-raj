@@ -93,7 +93,7 @@
           <thead>
           <tr>
               <th class="tg-0lax">Id przepisu</th>
-              <th class="tg-0lax">Id użytkownika</th>
+              <!-- <th class="tg-0lax">Id użytkownika</th> -->
               <th class="tg-0lax">Nazwa użytkownika</th>
               <th class="tg-0lax">Nazwa przepisu</th>
               <th class="tg-0lax"><span style="font-weight:400;font-style:normal">Typ</span></th>
@@ -108,7 +108,7 @@
           {% for recipe in recipes_to_check %}
               <tr>
               <td class="tg-0lax">{{ recipe.recipe_id }}</td>
-              <td class="tg-0lax">{{ recipe.user_id }}</td>
+              <!-- <td class="tg-0lax">{{ recipe.user_id }}</td> -->
               <td class="tg-0lax">{{ recipe.username }}</td>
               <td class="tg-0lax">{{ recipe.name }}</td>
               <td class="tg-0lax">{{ recipe.type_of_food }}</td>
@@ -117,8 +117,8 @@
               <td class="tg-0lax">{{ recipe.description }}</td>
               <td class="tg-0lax">{{ recipe.creation_date }}</td>
               <td class="tg-0lax">
-                  <a class="button is-success is-small" href="{{ url_for('main.accept_recipe', recipe_id=recipe.recipe_id) }}">Akceptuj przepis</a>
-                  <a class="button is-danger is-small" href="{{ url_for('main.delete_recipe', recipe_id=recipe.recipe_id) }}">Odrzuć przepis</a>
+                  <a class="button is-success is-small" href="{{ url_for('main.accept_recipe', recipe_id=recipe.recipe_id) }}">Akceptuj</a>
+                  <a class="button is-danger is-small" href="{{ url_for('main.delete_recipe', recipe_id=recipe.recipe_id) }}">Odrzuć</a>
               </td>
           </tr>
           {% endfor %}
