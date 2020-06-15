@@ -2,9 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    Jakiś przepis
+    <title>Podgląd przepisu</title>
+    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>WITKWINTNIE!</title>
+        <link rel="stylesheet" href="/static/css/bulma.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+      </head>
+
+
+
+      <body>
+
+        <!--Header-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="image is-64x64">
+        <img src="/static/img/logo.png" width=auto height=auto>
+      </a>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+        data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a href="{{ url_for('main.index') }}" class="navbar-item">
+          Strona główna
+        </a>
+
+        <a href="{{ url_for('main.about_us') }}" class="navbar-item">
+          O nas
+        </a>
+
+
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+
+
+            {% if session.user is defined %}
+
+            {% if session.user.role_name == "Administrator" %}
+            <a href="{{ url_for('main.admin') }}"class="button is-success is-outlined">
+              Panel Administratora
+            </a>
+            {% endif %}
+
+
+            <a href="{{ url_for('main.new_recipe') }}"class="button is-primary is-outlined">
+              Dodaj przepis
+            </a>
+            <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
+              Mój Profil
+            </a>
+            <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
+              Wyloguj
+            </a>
+
+
+            {% else %}
+
+            <a href="{{ url_for('main.register') }}"class="button is-primary">
+              <strong>Rejestracja</strong>
+            </a>
+            <a href="{{ url_for('main.login') }}" class="button is-light">
+              Logowanie
+            </a>
+
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+    
+    
+    
+    <article class="media">
+        
+        <div class="media-content recipe">
+          <div class="content">
+              <p>
+                  <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}" style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
+              <br>
+              {{ recipe.description  }}
+              </p>
+          </div>
+        </div>
+        </article>
+
+
+
+
+
+
+         <!--Stopka-->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>WITKWINTNIE DANIE</strong>
+      <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+      </br>
+      <p>Projekt dostępny na,
+        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
+      </p>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
