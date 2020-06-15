@@ -198,3 +198,13 @@ def accept_recipe(recipe_id):
 def delete_recipe(recipe_id):
     r.delete_recipe(recipe_id)
     return redirect(url_for('.admin'))
+
+
+@app.route('/szukaj')
+def search():
+    query = request.args.get('q')
+    type_ = request.args.get('typ')
+    if type_ not in ['nazwa', 'typ', 'kategoria']:
+        abort(406)
+    recipes = r.search_recipes(query, type_, True)
+    return render_template('szukaj.html', recipes=recipes)

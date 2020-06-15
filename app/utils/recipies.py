@@ -70,6 +70,33 @@ def delete_recipe(recipe_id):
     query_db("DELETE FROM recipes WHERE recipe_id = ?", recipe_id, commit=True)
 
 
+def search_recipes(name, type_, checked=None):
+    d = {
+        'nazwa': 'r.name',
+        'typ': 'tf.name',
+        'kategoria': 'fc.name',
+    }
+    sql = """
+        SELECT r.recipe_id, 
+            r.user_id, u.username, 
+            r.type_of_food_id, tf.name AS type_of_food, 
+            r.food_category_id, fc.name AS food_category, 
+            r.name, r.creation_date, r.description, r.rating, r.checked, r.time_required, r.views
+        FROM recipes r
+        INNER JOIN users u USING(user_id)
+        INNER JOIN types_of_food tf USING(type_of_food_id)
+        INNER JOIN food_categories fc USING(food_category_id)
+        WHERE {} LIKE ?
+    """.format(d[type_])
+
+    if checked is True:
+        return query_db_object(sql + " AND checked = 1", name)
+    elif checked is False:
+        return query_db_object(sql + " AND checked = 0", name)
+    else:
+        return query_db_object(sql, name)
+
+
 # daily
 def write_daily_file():
     d = {
