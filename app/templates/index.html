@@ -94,7 +94,7 @@
       <article class="panel is-primary">
 
         <div class="panel-heading">
-          <div class="media" >
+          <div class="media">
             <div class="media-left">
               Przepisy
             </div>
@@ -103,7 +103,7 @@
             <div class="media-right">
             </div>
           </div>
-          
+
         </div>
         <!-- przerwa dla lepszego wyglądu-->
         <div class="panel-block">
@@ -193,9 +193,9 @@
         <p class="panel-heading">
           Wyszukiwanie przepisu
         </p>
-        
-          <div class="tabs is-centered">
-          
+
+        <div class="tabs is-centered">
+
 
         </div>
 
@@ -204,66 +204,82 @@
         <section class="section">
           <div class="container has-text-centered">
             <div class="columns">
-              
-  
-                <form method="GET" action="/szukaj">
-                  <div class="columns">
-                    <div class="column is-two-fifths">
-                      <div class="control">
-                        <input class="input" type="tesxt" placeholder="Wyszukaj przepisu" name="q">
-                      </div>
-                    </br>
-                      <div class="field">
-                        <button class="button is-info is-rounded">Szukaj po nazwie</button>
-                      </div>
+
+
+              <form method="GET" action="/szukaj">
+                <div class="columns">
+                  <div class="column is-two-fifths">
+                    <div class="control">
+                      <input class="input" type="text" placeholder="Wyszukaj przepisu" name="q">
                     </div>
-
-
-                    <div class="column">
-                      <div class="control">
-                      <div class="select is-primary"> 
-                        <select name="type" >
-                          {% for type in types_of_food %}
-                          <option value="{{ type.type_of_food_id }}">{{ type.name }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
+                    <div class="control">
+                      <input class="input" type="hidden" name="typ" value="nazwa">
                     </div>
                     </br>
                     <div class="field">
-                      <button class="button is-info is-rounded">Szukaj po typie</button>
-                    </div>
-
-                    </div>
-                    <div class="column">
-                      <div class="control">
-                      <div class="select is-primary">
-                        <select name="category" >
-                          {% for category in food_categories %}
-                          <option value="{{ category.food_category_id }}">{{ category.name }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                    </div>
-                  </br>
-                      <div class="field">
-                        <button class="button is-info is-rounded">Szukaj po kategori</button>
-                      </div>
+                      <button class="button is-info is-rounded">Szukaj po nazwie</button>
                     </div>
                   </div>
-                  
+              </form>
 
-                  
-                </form>
-              
+
+
+              <form method="GET" action="/szukaj">
+                <div class="column">
+                  <div class="control">
+                    <div class="select is-primary">
+                      <select name="q">
+                        {% for type in types_of_food %}
+                        <option value="{{ type.name }}">{{ type.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="control">
+                      <input class="input" type="hidden" name="typ" value="typ">
+                    </div>
+                  </div>
+                  </br>
+                  <div class="field">
+                    <button class="button is-info is-rounded">Szukaj po typie</button>
+                  </div>
+
+                </div>
+              </form>
+
+              <form method="GET" action="/szukaj">
+                <div class="column">
+                  <div class="control">
+                    <div class="select is-primary">
+                      <select name="q">
+                        {% for category in food_categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="control">
+                      <input class="input" type="hidden" name="typ" value="kategoria">
+                    </div>
+                  </div>
+                  </br>
+                  <div class="field">
+                    <button class="button is-info is-rounded">Szukaj po kategorii</button>
+                  </div>
+                </div>
+              </form>
             </div>
+
+
+
+            </form>
+
           </div>
-        </section>
-  
+    </div>
+    </section>
 
 
-      <!--ostatnie przepisy-->
-      <!--
+
+    <!--ostatnie przepisy-->
+    <!--
       <article class="panel is-info">
         <p class="panel-heading">
           Ostatnie przepisy
@@ -391,9 +407,9 @@
           </div>
         </article>
       -->
-      </article>
+    </article>
 
-    </div>
+  </div>
   </div>
 
 
