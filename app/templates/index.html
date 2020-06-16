@@ -46,13 +46,13 @@
             {% if session.user is defined %}
 
             {% if session.user.role_name == "Administrator" %}
-            <a href="{{ url_for('main.admin') }}"class="button is-success is-outlined">
+            <a href="{{ url_for('main.admin') }}" class="button is-success is-outlined">
               Panel Administratora
             </a>
             {% endif %}
 
 
-            <a href="{{ url_for('main.new_recipe') }}"class="button is-primary is-outlined">
+            <a href="{{ url_for('main.new_recipe') }}" class="button is-primary is-outlined">
               Dodaj przepis
             </a>
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
@@ -65,7 +65,7 @@
 
             {% else %}
 
-            <a href="{{ url_for('main.register') }}"class="button is-primary">
+            <a href="{{ url_for('main.register') }}" class="button is-primary">
               <strong>Rejestracja</strong>
             </a>
             <a href="{{ url_for('main.login') }}" class="button is-light">
@@ -80,19 +80,10 @@
     </div>
   </nav>
 
-  <!--obrazek do poprawki-->
   <div class="hero">
     <img src="/static/img/index_background.png" />
   </div>
 
-
-
-
-
-
-
-
-  <!--Ostatnie przepisy -->
 
 
   <!--przepisy-->
@@ -101,17 +92,30 @@
   <div class="columns">
     <div class="column is-two-thirds">
       <article class="panel is-primary">
-        <p class="panel-heading">
-          Przepisy
-        </p>
+
+        <div class="panel-heading">
+          <div class="media" >
+            <div class="media-left">
+              Przepisy
+            </div>
+            <div class="media-content">
+            </div>
+            <div class="media-right">
+              <a href="{{ url_for('main.search') }}" class="button  is-small is-info is-inverted">
+                Szukaj przepisu
+              </a>
+            </div>
+          </div>
+          
+        </div>
         <!-- przerwa dla lepszego wyglądu-->
         <div class="panel-block">
           <div class="tabs is-centered">
           </div>
         </div>
 
-          {% for recipe in recipes %}
-          <article class="media">
+        {% for recipe in recipes %}
+        <article class="media">
           <figure class="media-left">
             <p class="image is-96x96">
               <img src="/static/img/logo.png">
@@ -119,18 +123,19 @@
           </figure>
           <div class="media-content recipe">
             <div class="content">
-                <p>
-                    <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}" style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
+              <p>
+                <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}"
+                  style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
                 <br>
                 {{ recipe.description | truncate(50) }}
-                </p>
+              </p>
             </div>
             <nav class="level is-mobile">
               <div class="level-left">
                 <a class="level-item">
                   <span class="icon is-small"><i class="fas fa-heart"></i></span>
                 </a>
-                  <span style="margin-left: 3px">Wyświetleń: {{ recipe.views }}</span>
+                <span style="margin-left: 3px">Wyświetleń: {{ recipe.views }}</span>
               </div>
             </nav>
           </div>
@@ -138,8 +143,8 @@
             <a class="button" href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}">Podgląd</a>
             <!-- <button class="button">Pobierz</button> -->
           </div>
-          </article>
-          {% endfor %}
+        </article>
+        {% endfor %}
       </article>
     </div>
 
@@ -162,9 +167,11 @@
           <div class="media-content">
             <div class="content">
               <p>
-                  <a href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}" style="color: inherit"><strong>{{ daily_recipe.name }}</strong></a> <small>@{{ daily_recipe.username }}</small>
+                <a href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}"
+                  style="color: inherit"><strong>{{ daily_recipe.name }}</strong></a>
+                <small>@{{ daily_recipe.username }}</small>
                 <br>
-                  {{ daily_recipe.description | truncate(25) }}
+                {{ daily_recipe.description | truncate(25) }}
               </p>
             </div>
           </div>
@@ -176,20 +183,58 @@
       </article>
 
 
-        <div class="column">
-          <br>
+      <div class="column">
+        <br>
+      </div>
+
+
+
+
+      <article class="panel is-info">
+
+
+
+        <p class="panel-heading">
+          Wyszukiwanie przepisu
+        </p>
+        
+          <div class="tabs is-centered">
+          
+
         </div>
 
 
-<!--ostatnie przepisy-->
+
+        <section class="section">
+          <div class="container has-text-centered">
+            <div class="columns is-centered">
+              
+  
+                <form method="GET">
+  
+                  <div class="field">
+                    <div class="control">
+                      <input class="input" type="text" placeholder="Wyszukaj przepisu" name="q/typ">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <button class="button is-info is-rounded">Szukaj</button>
+                  </div>
+                </form>
+              
+            </div>
+          </div>
+        </section>
+  
 
 
+      <!--ostatnie przepisy-->
+      <!--
       <article class="panel is-info">
         <p class="panel-heading">
           Ostatnie przepisy
         </p>
         <div class="panel-block">
-          <!--przerwa dla wyglądu-->
         <div class="panel-block">
           <div class="tabs is-centered">
           </div>
@@ -311,18 +356,11 @@
             <button class="button">podgląd</button>
           </div>
         </article>
-
-
-
-
-
-
+      -->
       </article>
 
     </div>
   </div>
-
-
 
 
   <!--Stopka-->
@@ -330,11 +368,11 @@
     <div class="content has-text-centered">
       <p>
         <strong>WITKWINTNIE DANIE</strong>
-        <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+      <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
       </br>
-        <p>Projekt dostępny na,
+      <p>Projekt dostępny na,
         <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
-        </p>
+      </p>
       </p>
     </div>
   </footer>

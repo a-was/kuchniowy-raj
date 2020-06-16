@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Podgląd przepisu</title>
-    
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>WITKWINTNIE!</title>
-        <link rel="stylesheet" href="/static/css/bulma.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-      </head>
+  <meta charset="UTF-8">
+  <title>Podgląd przepisu</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WITKWINTNIE!</title>
+  <link rel="stylesheet" href="/static/css/bulma.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</head>
 
 
 
-      <body>
+<body>
 
-        <!--Header-->
+  <!--Header-->
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="image is-64x64">
@@ -51,13 +52,13 @@
             {% if session.user is defined %}
 
             {% if session.user.role_name == "Administrator" %}
-            <a href="{{ url_for('main.admin') }}"class="button is-success is-outlined">
+            <a href="{{ url_for('main.admin') }}" class="button is-success is-outlined">
               Panel Administratora
             </a>
             {% endif %}
 
 
-            <a href="{{ url_for('main.new_recipe') }}"class="button is-primary is-outlined">
+            <a href="{{ url_for('main.new_recipe') }}" class="button is-primary is-outlined">
               Dodaj przepis
             </a>
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
@@ -70,7 +71,7 @@
 
             {% else %}
 
-            <a href="{{ url_for('main.register') }}"class="button is-primary">
+            <a href="{{ url_for('main.register') }}" class="button is-primary">
               <strong>Rejestracja</strong>
             </a>
             <a href="{{ url_for('main.login') }}" class="button is-light">
@@ -84,39 +85,51 @@
       </div>
     </div>
   </nav>
-    
-    
-    
-    <article class="media">
-        
-        <div class="media-content recipe">
-          <div class="content">
-              <p>
-                  <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}" style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
-              <br>
-              {{ recipe.description  }}
-              </p>
-          </div>
+
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-5 is-4-desktop">
+          <article class="media">
+
+            <div class="media-content recipe">
+              <div class="content">
+                <p>
+                  <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}"
+                    style="color: inherit"><h1 class="title"><strong>{{ recipe.name }}</strong></h1></a> 
+                    <h2 class="subtitle"><small>@{{ recipe.username }}</small></h2>
+                  <br>
+                  {{ recipe.description  }}
+                </p>
+              </div>
+            </div>
+          </article>
         </div>
-        </article>
-
-
-
-
-
-
-         <!--Stopka-->
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        <strong>WITKWINTNIE DANIE</strong>
-      <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
-      </br>
-      <p>Projekt dostępny na,
-        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
-      </p>
-      </p>
+      </div>
     </div>
-  </footer>
+    </section>
+
+
+
+
+
+
+
+
+    <!--Stopka-->
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>WITKWINTNIE DANIE</strong>
+        <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+        </br>
+        <p>Projekt dostępny na,
+          <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
+        </p>
+        </p>
+      </div>
+    </footer>
 </body>
+
 </html>

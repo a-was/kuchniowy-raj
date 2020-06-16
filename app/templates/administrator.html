@@ -7,14 +7,40 @@
   <title>WITKWINTNIE!</title>
   <link rel="stylesheet" href="/static/css/bulma.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;}
-        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-            overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg .tg-0lax{text-align:left;vertical-align:top}
-    </style>
+  <style type="text/css">
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .tg td {
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+    }
+
+    .tg th {
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+    }
+
+    .tg .tg-0lax {
+      text-align: left;
+      vertical-align: top
+    }
+  </style>
 </head>
 
 <body>
@@ -76,7 +102,7 @@
                 </a>
                 <a href="{{ url_for('main.login') }}" class="button is-light">
                   Logowanie
-                {% endif %}
+                  {% endif %}
 
                 </a>
           </div>
@@ -85,13 +111,14 @@
     </div>
   </nav>
 
+
   <section class="section">
     <div class="columns is-centered">
       <div class="control">
-      {% if recipes_to_check %}
+        {% if recipes_to_check %}
         <table class="tg">
           <thead>
-          <tr>
+            <tr>
               <th class="tg-0lax">Id przepisu</th>
               <!-- <th class="tg-0lax">Id użytkownika</th> -->
               <th class="tg-0lax">Nazwa użytkownika</th>
@@ -102,11 +129,11 @@
               <th class="tg-0lax">Opis przygotowania</th>
               <th class="tg-0lax"><span style="font-weight:400;font-style:normal">Data utworzenia</span></th>
               <th class="tg-0lax">Zatwierdzić?</th>
-          </tr>
+            </tr>
           </thead>
           <tbody>
-          {% for recipe in recipes_to_check %}
-              <tr>
+            {% for recipe in recipes_to_check %}
+            <tr>
               <td class="tg-0lax">{{ recipe.recipe_id }}</td>
               <!-- <td class="tg-0lax">{{ recipe.user_id }}</td> -->
               <td class="tg-0lax">{{ recipe.username }}</td>
@@ -117,19 +144,25 @@
               <td class="tg-0lax">{{ recipe.description }}</td>
               <td class="tg-0lax">{{ recipe.creation_date }}</td>
               <td class="tg-0lax">
-                  <a class="button is-success is-small" href="{{ url_for('main.accept_recipe', recipe_id=recipe.recipe_id) }}">Akceptuj</a>
-                  <a class="button is-danger is-small" href="{{ url_for('main.delete_recipe', recipe_id=recipe.recipe_id) }}">Odrzuć</a>
+                <a class="button is-success is-small"
+                  href="{{ url_for('main.accept_recipe', recipe_id=recipe.recipe_id) }}">Akceptuj</a>
+                <a class="button is-danger is-small"
+                  href="{{ url_for('main.delete_recipe', recipe_id=recipe.recipe_id) }}">Odrzuć</a>
               </td>
-          </tr>
-          {% endfor %}
+            </tr>
+            {% endfor %}
           </tbody>
-      </table>
-      {% else %}
-          <p>Brak przepisów do zatwierdzenia</p>
-      {% endif %}
+        </table>
+        {% else %}
+        <p>Brak przepisów do zatwierdzenia</p>
+        {% endif %}
       </div>
     </div>
-  </div>
+  </section>
+
+
+
+
 
 
 
