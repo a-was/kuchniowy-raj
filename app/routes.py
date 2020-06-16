@@ -147,10 +147,26 @@ def new_recipe():
     recipe_description = request.form.get('description')
     # recipe_level = request.form.get('cooking_level')
 
-    if any(v is None for v in [recipe_name, recipe_type, recipe_food_category, recipe_time_required,
-                               recipe_description]):
+    if any(v is None or v == '' for v in [recipe_name, recipe_type, recipe_food_category, recipe_time_required,
+                                          recipe_description]):
         return render_template('dodaj_przepis.html',
                                msg=error_message('Nie wypełniono wszystkich pól'),
+                               food_categories=food_categories,
+                               types_of_food=types_of_food)
+
+    try:
+        recipe_time_required = recipe_time_required.replace(',', '.')
+        float(recipe_time_required)
+    except (TypeError, ValueError):
+        return render_template('dodaj_przepis.html',
+                               msg=error_message('Czas przygotowania musi być liczbą'),
+                               food_categories=food_categories,
+                               types_of_food=types_of_food)
+
+    if not r.validate_name(recipe_name):
+        msg = 'Podano błędną nazwę przepisu. Powinna zawierać od 5 do 30 znaków oraz wybrane znaki specjalne (!:.,-)'
+        return render_template('dodaj_przepis.html',
+                               msg=error_message(msg),
                                food_categories=food_categories,
                                types_of_food=types_of_food)
 
@@ -160,7 +176,7 @@ def new_recipe():
                                food_categories=food_categories,
                                types_of_food=types_of_food)
 
-    if len(recipe_description) < 50 or len(recipe_description) > 5000:
+    if not r.validate_description(recipe_description):
         return render_template('dodaj_przepis.html',
                                msg=error_message('Opis powinien mieć od 50 do 5000 znaków'),
                                food_categories=food_categories,

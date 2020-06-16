@@ -1,9 +1,18 @@
 import pickle
 import random
+import re
 from datetime import datetime
 
 from app.config import Config
 from app.db import query_db, query_db_object
+
+
+def validate_name(name):
+    return True if re.fullmatch(Config.RECIPE_NAME_REGEX, name) else False
+
+
+def validate_description(description):
+    return True if re.fullmatch(Config.RECIPE_DESCRIPTION_REGEX, description) else False
 
 
 def recipe_exists(name):
