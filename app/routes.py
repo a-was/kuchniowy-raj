@@ -251,9 +251,15 @@ def delete_recipe(recipe_id):
 
 @app.route('/szukaj')
 def search():
+    food_categories = fc.get_food_categories_list()
+    types_of_food = tof.get_types_of_food_list()
+
     query = request.args.get('q')
     type_ = request.args.get('typ')
     if type_ not in ['nazwa', 'typ', 'kategoria']:
         abort(406)
     recipes = r.search_recipes(query, type_, True)
-    return render_template('szukaj.html', recipes=recipes)
+    return render_template('szukaj.html',
+                           recipes=recipes,
+                           food_categories=food_categories,
+                           types_of_food=types_of_food)
