@@ -13,7 +13,13 @@ app = Blueprint('main', __name__, template_folder='templates')
 
 @app.route('/')
 def index():
-    return render_template('index.html', recipes=r.get_recipes_list(True), daily_recipe=r.get_daily_recipe())
+    food_categories = fc.get_food_categories_list()
+    types_of_food = tof.get_types_of_food_list()
+    return render_template('index.html',
+                           recipes=r.get_recipes_list(True),
+                           daily_recipe=r.get_daily_recipe(),
+                           food_categories=food_categories,
+                           types_of_food=types_of_food)
 
 
 @app.route('/o-nas')
