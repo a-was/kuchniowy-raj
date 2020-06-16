@@ -60,7 +60,7 @@ def get_all_users():
             u.sex
         FROM users u
         INNER JOIN roles r USING (role_id)
-        INNER JOIN cooking_levels cl USING (cooking_level_id) 
+        LEFT JOIN cooking_levels cl USING (cooking_level_id) 
     """)
 
 

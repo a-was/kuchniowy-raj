@@ -33,7 +33,7 @@ def get_recipes_list(checked=None):
             r.food_category_id, fc.name AS food_category, 
             r.name, r.creation_date, r.description, r.rating, r.checked, r.time_required, r.views
         FROM recipes r
-        INNER JOIN users u USING(user_id)
+        LEFT JOIN users u USING(user_id)
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
     """
@@ -53,7 +53,7 @@ def get_recipe(recipe_id):
             r.food_category_id, fc.name AS food_category, 
             r.name, r.creation_date, r.description, r.rating, r.checked, r.time_required, r.views
         FROM recipes r
-        INNER JOIN users u USING(user_id)
+        LEFT JOIN users u USING(user_id)
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
         WHERE r.recipe_id = ?
@@ -92,18 +92,18 @@ def search_recipes(name, type_, checked=None):
             r.food_category_id, fc.name AS food_category, 
             r.name, r.creation_date, r.description, r.rating, r.checked, r.time_required, r.views
         FROM recipes r
-        INNER JOIN users u USING(user_id)
+        LEFT JOIN users u USING(user_id)
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
-        WHERE {} LIKE ?
-    """.format(d[type_])
+        WHERE {} LIKE '%s{}%s'
+    """.format(d[type_], name)
 
     if checked is True:
-        return query_db_object(sql + " AND checked = 1", name)
+        return query_db_object(sql + " AND checked = 1")
     elif checked is False:
-        return query_db_object(sql + " AND checked = 0", name)
+        return query_db_object(sql + " AND checked = 0")
     else:
-        return query_db_object(sql, name)
+        return query_db_object(sql)
 
 
 # daily
