@@ -62,3 +62,7 @@ def get_all_users():
         INNER JOIN roles r USING (role_id)
         INNER JOIN cooking_levels cl USING (cooking_level_id) 
     """)
+
+
+def delete_user(user_id):
+    query_db("DELETE FROM users WHERE user_id = ?", user_id, commit=True)

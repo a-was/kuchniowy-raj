@@ -173,6 +173,7 @@
                   <th class="tg-0pky"><span style="font-weight:400;font-style:normal">Poziom zaawansowania</span></th>
                   <th class="tg-0pky">Płeć</th>
                   <th class="tg-0pky">Zmiana roli</th>
+                  <th class="tg-0pky">Usunięcie użytkownika</th>
               </tr>
               </thead>
               <tbody>
@@ -190,6 +191,10 @@
                              href="{{ url_for('main.set_user_role', user_id=user.user_id) }}">Użytkownik</a>
                           <a class="button is-danger is-small"
                              href="{{ url_for('main.set_admin_role', user_id=user.user_id) }}">Administrator</a>
+                      </td>
+                      <td>
+                          <a class="button is-danger is-small"
+                             href="{{ url_for('main.delete_user', user_id=user.user_id) }}">Usuń użytkownika</a>
                       </td>
                   </tr>
               {% endfor %}

@@ -145,6 +145,15 @@ def set_user_role(user_id):
     return redirect(url_for('.admin'))
 
 
+@app.route('/usun/uzytkownik/<int:user_id>')
+@login_required
+@admin_required
+def delete_user(user_id):
+    if user_id != get_user_id():
+        u.delete_user(user_id)
+    return redirect(url_for('.admin'))
+
+
 @app.route('/dodaj-przepis', methods=['GET', 'POST'])
 @login_required
 def new_recipe():
