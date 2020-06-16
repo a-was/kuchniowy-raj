@@ -22,89 +22,56 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
         <a href="{{ url_for('main.index') }}" class="navbar-item">
           Strona główna
         </a>
-
         <a href="{{ url_for('main.about_us') }}" class="navbar-item">
           O nas
         </a>
-
-
       </div>
-
 
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-
-
             {% if session.user is defined %}
-
             {% if session.user.role_name == "Administrator" %}
             <a href="{{ url_for('main.admin') }}" class="button is-success is-outlined">
               Panel Administratora
             </a>
             {% endif %}
-
             <a href="{{ url_for('main.new_recipe') }}" class="button is-primary is-outlined">
               Dodaj przepis
             </a>
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
               Mój Profil
-              <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
-                Wyloguj
-
-
-
-                {% else %}
-
-
-                <a href="{{ url_for('main.register') }}" class="button is-primary">
-                  <strong>Rejestracja</strong>
-                </a>
-                <a href="{{ url_for('main.login') }}" class="button is-light">
-                  Logowanie
-
-
-
-                  {% endif %}
-
-                </a>
+            </a>
+            <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
+              Wyloguj
+            </a>
+            {% else %}
+            <a href="{{ url_for('main.register') }}" class="button is-primary">
+              <strong>Rejestracja</strong>
+            </a>
+            <a href="{{ url_for('main.login') }}" class="button is-light">
+              Logowanie
+              {% endif %}
+            </a>
           </div>
         </div>
       </div>
     </div>
   </nav>
 
-
-
   <section class="section">
     <div class="container has-text-centered">
-
-      
-
       <div class="columns is-centered">
-
-
-
-        
-
-
-
         <article class="media">
           <div class="media-content recipe">
-
-
-
             <section class="section">
               <div class="container has-text-centered">
                 <div class="columns">
-    
-    
                   <form method="GET" action="/szukaj">
                     <div class="columns">
                       <div class="column">
@@ -120,9 +87,7 @@
                         </div>
                       </div>
                   </form>
-    
-    
-    
+
                   <form method="GET" action="/szukaj">
                     <div class="column">
                       <div class="control">
@@ -141,10 +106,9 @@
                       <div class="field">
                         <button class="button is-info is-rounded">Szukaj po typie</button>
                       </div>
-    
                     </div>
                   </form>
-    
+
                   <form method="GET" action="/szukaj">
                     <div class="column">
                       <div class="control">
@@ -168,7 +132,6 @@
                 </div>
               </div>
             </section>
-
 
             <div class="content">
               {% for recipe in recipes %}
@@ -199,16 +162,10 @@
           </div>
         </article>
       </div>
-
     </div>
   </section>
 
-
-
-
-
-
-
+  <!--Stopka-->
   <footer class="footer">
     <div class="content has-text-centered">
       <p>

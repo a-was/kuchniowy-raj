@@ -43,33 +43,37 @@
 
             {% if session.user is defined %}
 
-
             {% if session.user.role_name == "Administrator" %}
-            <a href="{{ url_for('main.admin') }}"class="button is-success is-outlined">
+            <a href="{{ url_for('main.admin') }}" class="button is-success is-outlined">
               Panel Administratora
             </a>
+
             {% endif %}
 
             <a href="{{ url_for('main.new_recipe') }}" class="button is-primary is-outlined">
               Dodaj przepis
             </a>
+
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
               Mój Profil
-              <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
-                Wyloguj
+            </a>
 
-                {% else %}
+            <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
+              Wyloguj
+            </a>
+
+            {% else %}
 
 
-                <a href="{{ url_for('main.register') }}" class="button is-primary">
-                  <strong>Rejestracja</strong>
-                </a>
-                <a href="{{ url_for('main.login') }}" class="button is-light">
-                  Logowanie
+            <a href="{{ url_for('main.register') }}" class="button is-primary">
+              <strong>Rejestracja</strong>
+            </a>
+            <a href="{{ url_for('main.login') }}" class="button is-light">
+              Logowanie
+            </a>
 
-                  {% endif %}
-
-                </a>
+            {% endif %}
+            </a>
           </div>
         </div>
       </div>
@@ -89,7 +93,9 @@
                 {{msg.text}}
               </div>
             </div>
+
             {% endif %}
+
             <div class="field">
               <div class="control">
                 <input class="input is-primary is-medium" type="text" placeholder="Nazwa Przepisu" name="name" required>
@@ -98,39 +104,39 @@
 
             <div class="columns">
               <div class="column is-half">
-                  <div class="select is-primary"> 
-                    <select name="type" >
-                      {% for type in types_of_food %}
-                      <option value="{{ type.type_of_food_id }}">{{ type.name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-              </div>
-              <div class="column is-half">
-                  <div class="select is-primary">
-                    <select name="category" >
-                      {% for category in food_categories %}
-                      <option value="{{ category.food_category_id }}">{{ category.name }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
+                <div class="select is-primary">
+                  <select name="type">
+                    {% for type in types_of_food %}
+                    <option value="{{ type.type_of_food_id }}">{{ type.name }}</option>
+                    {% endfor %}
+                  </select>
                 </div>
               </div>
 
-            <div class="field">
-              <div class="control">
-                <input class="input is-small is-primary" type="text" placeholder="Czas przygotowania (w minutach)." name="time" required>
+              <div class="column is-half">
+                <div class="select is-primary">
+                  <select name="category">
+                    {% for category in food_categories %}
+                    <option value="{{ category.food_category_id }}">{{ category.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
               </div>
             </div>
-            
+
+            <div class="field">
+              <div class="control">
+                <input class="input is-small is-primary" type="text" placeholder="Czas przygotowania (w minutach)."
+                  name="time" required>
+              </div>
+            </div>
 
 
-            <textarea class="textarea is-primary" placeholder="Podaj przepis jak przyrządzić twoje danie" rows="10" name="description"></textarea>
 
+            <textarea class="textarea is-primary"  placeholder="Podaj przepis jak przyrządzić twoje danie" rows="10" name="description">
+            </textarea>
 
-          </br>
-
-
+            </br>
 
             <div class="field">
               <button class="button is-primary is-fullwidth">Dodaj przepis</button>
@@ -145,14 +151,15 @@
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <strong>WITKWINTNIE DANIE</strong> 
-        <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+        <strong>WITKWINTNIE DANIE</strong>
+      <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
       </br>
-        <p>Projekt dostępny na,     
-        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>. 
-        </p>
+      <p>Projekt dostępny na,
+        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
+      </p>
       </p>
     </div>
-  </footer> 
+  </footer>
 </body>
+
 </html>

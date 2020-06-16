@@ -11,7 +11,6 @@
 </head>
 
 <body>
-  <!--Header-->
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="image is-64x64">
@@ -30,52 +29,37 @@
         <a href="{{ url_for('main.index') }}" class="navbar-item">
           Strona główna
         </a>
-
         <a href="{{ url_for('main.about_us') }}" class="navbar-item">
           O nas
         </a>
-
-
-
       </div>
 
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-
-
             {% if session.user is defined %}
-
             {% if session.user.role_name == "Administrator" %}
             <a href="{{ url_for('main.admin') }}" class="button is-success is-outlined">
               Panel Administratora
             </a>
             {% endif %}
-
             <a href="{{ url_for('main.new_recipe') }}" class="button is-primary is-outlined">
               Dodaj przepis
             </a>
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
               Mój Profil
-              <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
-                Wyloguj
-
-
-
-                {% else %}
-
-
-                <a href="{{ url_for('main.register') }}" class="button is-primary">
-                  <strong>Rejestracja</strong>
-                </a>
-                <a href="{{ url_for('main.login') }}" class="button is-light">
-                  Logowanie
-
-
-
-                  {% endif %}
-
-                </a>
+            </a>
+            <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
+              Wyloguj
+            </a>
+            {% else %}
+            <a href="{{ url_for('main.register') }}" class="button is-primary">
+              <strong>Rejestracja</strong>
+            </a>
+            <a href="{{ url_for('main.login') }}" class="button is-light">
+              Logowanie
+              {% endif %}
+            </a>
           </div>
         </div>
       </div>
@@ -87,8 +71,6 @@
       <div class="columns is-centered">
         <div class="column is-5 is-4-desktop">
           <form method="post">
-
-
             {% if msg %}
             <div class="field">
               <div class="control">
@@ -96,8 +78,6 @@
               </div>
             </div>
             {% endif %}
-
-
             <div class="field">
               <div class="control">
                 <label class="label">Podaj nowe hasło.</label>
@@ -121,11 +101,8 @@
     </div>
   </section>
 
-
   <script>
-
     $(document).ready(function () {
-
       var calculateComplexity = function (password) {
         var complexity = 0;
         var regExps = [
@@ -135,19 +112,16 @@
           /.{8}/,
           /[!-//:-@[-`{-ÿ]/
         ];
-
         regExps.forEach(function (regexp) {
           if (regexp.test(password)) {
             complexity++;
           }
         });
-
         return {
           value: complexity,
           max: regExps.length
         };
       };
-
       var checkPasswordStregth = function (password) {
         var progress = document.querySelector('#passwordComplexity'),
           complexity = calculateComplexity(this.value);
@@ -155,19 +129,12 @@
         progress.value = complexity.value;
         progress.max = complexity.max;
       };
-
       var input = document.querySelector('#passwordField');
       input.addEventListener('keyup', checkPasswordStregth);
 
     }
     )
   </script>
-
-
-
-
-
-
 
   <!--Stopka-->
   <footer class="footer">

@@ -7,6 +7,7 @@
   <title>WITKWINTNIE!</title>
   <link rel="stylesheet" href="/static/css/bulma.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
   <style type="text/css">
     .tg {
       border-collapse: collapse;
@@ -35,7 +36,7 @@
       padding: 10px 5px;
       word-break: normal;
     }
-
+    
     .tg .tg-0lax {
       text-align: left;
       vertical-align: top
@@ -62,55 +63,43 @@
         <a href="{{ url_for('main.index') }}" class="navbar-item">
           Strona główna
         </a>
-
         <a href="{{ url_for('main.about_us') }}" class="navbar-item">
           O nas
         </a>
-
-
       </div>
-
 
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-
-
             {% if session.user is defined %}
-
             {% if session.user.role_name == "Administrator" %}
             <a href="{{ url_for('main.admin') }}" class="button is-success is-outlined">
               Panel Administratora
             </a>
             {% endif %}
-
             <a href="{{ url_for('main.new_recipe') }}" class="button is-primary is-outlined">
               Dodaj przepis
             </a>
             <a href="{{ url_for('main.user_profile') }}" class="button is-info is-outlined">
               Mój Profil
-              <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
-                Wyloguj
+            </a>
+            <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
+              Wyloguj
+            </a>
+            {% else %}
+            <a href="{{ url_for('main.register') }}" class="button is-primary">
+              <strong>Rejestracja</strong>
+            </a>
+            <a href="{{ url_for('main.login') }}" class="button is-light">
+              Logowanie
+              {% endif %}
+            </a>
 
-
-
-                {% else %}
-
-
-                <a href="{{ url_for('main.register') }}" class="button is-primary">
-                  <strong>Rejestracja</strong>
-                </a>
-                <a href="{{ url_for('main.login') }}" class="button is-light">
-                  Logowanie
-                  {% endif %}
-
-                </a>
           </div>
         </div>
       </div>
     </div>
   </nav>
-
 
   <section class="section">
     <div class="columns is-centered">
@@ -157,72 +146,68 @@
         {% else %}
         <p>Brak przepisów do zatwierdzenia</p>
         {% endif %}
-     
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+        
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
 
-      <div class="container has-text-centered">
-        <p class="title is-3 is-spaced">Użytkownicy:</p>
-        <table class="table">
-          <thead>
-            <tr>
-              <th class="tg-0pky">Id</th>
-              <th class="tg-0pky"><span style="font-weight:400;font-style:normal">Nazwa użytkownika</span></th>
-              <th class="tg-0pky">Data utworzenia konta</th>
-              <th class="tg-0pky">Data ostatniego logowania</th>
-              <th class="tg-0pky">Rola</th>
-              <th class="tg-0pky"><span style="font-weight:400;font-style:normal">Poziom zaawansowania</span></th>
-              <th class="tg-0pky">Płeć</th>
-              <th class="tg-0pky">Zmiana roli</th>
-              <th class="tg-0pky">Usunięcie użytkownika</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for user in users %}
-            <tr>
-              <td class="tg-0pky">{{ user.user_id }}</td>
-              <td class="tg-0pky">{{ user.username }}</td>
-              <td class="tg-0pky">{{ user.creation_date }}</td>
-              <td class="tg-0pky">{{ user.last_login_date }}</td>
-              <td class="tg-0pky">{{ user.role }}</td>
-              <td class="tg-0pky">{{ user.cooking_level }}</td>
-              <td class="tg-0pky">{{ user.sex }}</td>
-              <td class="tg-0pky">
-                <div class="columns">
-                  <div class="column">
-                    <a class="button is-success is-small"
-                      href="{{ url_for('main.set_user_role', user_id=user.user_id) }}">Użytkownik</a>
-                    <div class="columns is-mobile">
-                      <div class="column">
-                        <a class="button is-danger is-small"
-                          href="{{ url_for('main.set_admin_role', user_id=user.user_id) }}">Administrator</a>
+        <div class="container has-text-centered">
+          <p class="title is-3 is-spaced">Użytkownicy:</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="tg-0pky">Id</th>
+                <th class="tg-0pky"><span style="font-weight:400;font-style:normal">Nazwa użytkownika</span></th>
+                <th class="tg-0pky">Data utworzenia konta</th>
+                <th class="tg-0pky">Data ostatniego logowania</th>
+                <th class="tg-0pky">Rola</th>
+                <th class="tg-0pky"><span style="font-weight:400;font-style:normal">Poziom zaawansowania</span></th>
+                <th class="tg-0pky">Płeć</th>
+                <th class="tg-0pky">Zmiana roli</th>
+                <th class="tg-0pky">Usunięcie użytkownika</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <td class="tg-0pky">{{ user.user_id }}</td>
+                <td class="tg-0pky">{{ user.username }}</td>
+                <td class="tg-0pky">{{ user.creation_date }}</td>
+                <td class="tg-0pky">{{ user.last_login_date }}</td>
+                <td class="tg-0pky">{{ user.role }}</td>
+                <td class="tg-0pky">{{ user.cooking_level }}</td>
+                <td class="tg-0pky">{{ user.sex }}</td>
+                <td class="tg-0pky">
+                  <div class="columns">
+                    <div class="column">
+                      <a class="button is-success is-small"
+                        href="{{ url_for('main.set_user_role', user_id=user.user_id) }}">Użytkownik</a>
+                      <div class="columns is-mobile">
+                        <div class="column">
+                          <a class="button is-danger is-small"
+                            href="{{ url_for('main.set_admin_role', user_id=user.user_id) }}">Administrator</a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </td>
-              <td>
-                <a class="button is-danger is-small" href="{{ url_for('main.delete_user', user_id=user.user_id) }}">Usuń
-                  użytkownika</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+                </td>
+                <td>
+                  <a class="button is-danger is-small"
+                    href="{{ url_for('main.delete_user', user_id=user.user_id) }}">
+                    Usuń użytkownika</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
     </div>
   </section>
 
-
-
-
-
-
-
+<!--Stopka-->
   <footer class="footer">
     <div class="content has-text-centered">
       <p>

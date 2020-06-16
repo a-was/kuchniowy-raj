@@ -7,10 +7,10 @@
   <title>WITKWINTNIE!</title>
   <link rel="stylesheet" href="/static/css/bulma.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-
 </head>
 
 <body>
+
   <!--Header-->
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
@@ -35,7 +35,6 @@
           O nas
         </a>
 
-
       </div>
 
       <div class="navbar-end">
@@ -50,8 +49,6 @@
               Panel Administratora
             </a>
             {% endif %}
-
-
             <a href="{{ url_for('main.new_recipe') }}" class="button is-primary is-outlined">
               Dodaj przepis
             </a>
@@ -61,19 +58,14 @@
             <a href="{{ url_for('main.logout') }}" class="button is-danger is-outlined">
               Wyloguj
             </a>
-
-
             {% else %}
-
             <a href="{{ url_for('main.register') }}" class="button is-primary">
               <strong>Rejestracja</strong>
             </a>
             <a href="{{ url_for('main.login') }}" class="button is-light">
               Logowanie
             </a>
-
             {% endif %}
-
           </div>
         </div>
       </div>
@@ -103,8 +95,8 @@
             <div class="media-right">
             </div>
           </div>
-
         </div>
+
         <!-- przerwa dla lepszego wyglądu-->
         <div class="panel-block">
           <div class="tabs is-centered">
@@ -122,7 +114,8 @@
             <div class="content">
               <p>
                 <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}"
-                  style="color: inherit"><strong>{{ recipe.name }}</strong></a> <small>@{{ recipe.username }}</small>
+                  style="color: inherit"><strong>{{ recipe.name }}</strong>
+                </a> <small>@{{ recipe.username }}</small>
                 <br>
                 {{ recipe.description | truncate(50) }}
               </p>
@@ -205,7 +198,6 @@
           <div class="container has-text-centered">
             <div class="columns">
 
-
               <form method="GET" action="/szukaj">
                 <div class="columns">
                   <div class="column is-two-fifths">
@@ -221,8 +213,6 @@
                     </div>
                   </div>
               </form>
-
-
 
               <form method="GET" action="/szukaj">
                 <div class="column">
@@ -242,7 +232,6 @@
                   <div class="field">
                     <button class="button is-info is-rounded">Szukaj po typie</button>
                   </div>
-
                 </div>
               </form>
 
@@ -266,10 +255,13 @@
                   </div>
                 </div>
               </form>
+
             </div>
           </div>
         </section>
-
+      </article>
+    </div>
+  </div>
 
 
         <!--ostatnie przepisy-->
@@ -401,10 +393,7 @@
           </div>
         </article>
       -->
-      </article>
-
-    </div>
-  </div>
+    
 
 
   <!--Stopka-->
