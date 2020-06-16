@@ -139,7 +139,8 @@ def admin():
 @login_required
 @admin_required
 def set_admin_role(user_id):
-    u.set_admin(user_id)
+    if user_id != get_user_id():
+        u.set_admin(user_id)
     return redirect(url_for('.admin'))
 
 
@@ -147,7 +148,8 @@ def set_admin_role(user_id):
 @login_required
 @admin_required
 def set_user_role(user_id):
-    u.set_user(user_id)
+    if user_id != get_user_id():
+        u.set_user(user_id)
     return redirect(url_for('.admin'))
 
 
