@@ -95,7 +95,7 @@ def search_recipes(name, type_, checked=None):
         LEFT JOIN users u USING(user_id)
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
-        WHERE {} LIKE '%s{}%s'
+        WHERE {} LIKE '%{}%'
     """.format(d[type_], name)
 
     if checked is True:
