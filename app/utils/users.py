@@ -27,6 +27,16 @@ def exists(username):
     return True if res[0] > 0 else False
 
 
+def set_admin(user_id):
+    query_db("UPDATE users SET role_id = (SELECT role_id FROM roles WHERE name = 'Administrator') WHERE user_id = ?",
+             user_id, commit=True)
+
+
+def set_user(user_id):
+    query_db("UPDATE users SET role_id = (SELECT role_id FROM roles WHERE name = 'User') WHERE user_id = ?",
+             user_id, commit=True)
+
+
 def new_user(username, password, sex, cooking_level):
     query_db("""
         INSERT INTO users (username, password, sex, role_id, cooking_level_id) 

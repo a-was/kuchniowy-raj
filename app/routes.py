@@ -129,6 +129,22 @@ def admin():
                            users=u.get_all_users())
 
 
+@app.route('/ustaw-role/<int:user_id>/administrator')
+@login_required
+@admin_required
+def set_admin_role(user_id):
+    u.set_admin(user_id)
+    return redirect(url_for('.admin'))
+
+
+@app.route('/ustaw-role/<int:user_id>/user')
+@login_required
+@admin_required
+def set_user_role(user_id):
+    u.set_user(user_id)
+    return redirect(url_for('.admin'))
+
+
 @app.route('/dodaj-przepis', methods=['GET', 'POST'])
 @login_required
 def new_recipe():
