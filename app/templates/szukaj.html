@@ -84,20 +84,122 @@
 
   <section class="section">
     <div class="container has-text-centered">
-      <div class="columns is-centered">
-        <div class="column is-5 is-4-desktop">
-          <article class="media">
 
-            <div class="media-content recipe">
-              <div class="content">
-                <p>
-                 test
-                </p>
+      
+
+      <div class="columns is-centered">
+
+
+
+        
+
+
+
+        <article class="media">
+          <div class="media-content recipe">
+
+
+
+            <section class="section">
+              <div class="container has-text-centered">
+                <div class="columns">
+    
+    
+                  <form method="GET" action="/szukaj">
+                    <div class="columns">
+                      <div class="column">
+                        <div class="control">
+                          <input class="input" type="text" placeholder="Wyszukaj przepisu" name="q">
+                        </div>
+                        <div class="control">
+                          <input class="input" type="hidden" name="typ" value="nazwa">
+                        </div>
+                        </br>
+                        <div class="field">
+                          <button class="button is-info is-rounded">Szukaj po nazwie</button>
+                        </div>
+                      </div>
+                  </form>
+    
+    
+    
+                  <form method="GET" action="/szukaj">
+                    <div class="column">
+                      <div class="control">
+                        <div class="select is-primary">
+                          <select name="q">
+                            {% for type in types_of_food %}
+                            <option value="{{ type.name }}">{{ type.name }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <div class="control">
+                          <input class="input" type="hidden" name="typ" value="typ">
+                        </div>
+                      </div>
+                      </br>
+                      <div class="field">
+                        <button class="button is-info is-rounded">Szukaj po typie</button>
+                      </div>
+    
+                    </div>
+                  </form>
+    
+                  <form method="GET" action="/szukaj">
+                    <div class="column">
+                      <div class="control">
+                        <div class="select is-primary">
+                          <select name="q">
+                            {% for category in food_categories %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <div class="control">
+                          <input class="input" type="hidden" name="typ" value="kategoria">
+                        </div>
+                      </div>
+                      </br>
+                      <div class="field">
+                        <button class="button is-info is-rounded">Szukaj po kategorii</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
+            </section>
+
+
+            <div class="content">
+              {% for recipe in recipes %}
+              <article class="media">
+                <figure class="media-left">
+                  <p class="image is-96x96">
+                    <img src="/static/img/logo.png">
+                  </p>
+                </figure>
+                <div class="media-content recipe">
+                  <div class="content">
+                    <p>
+                      <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}"
+                        style="color: inherit"><strong>{{ recipe.name }}</strong></a>
+                      <small>@{{ recipe.username }}</small>
+                      <br>
+                      {{ recipe.description | truncate(50) }}
+                    </p>
+                  </div>
+                </div>
+                <div class="media-right">
+                  <a class="button" href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}">Podgląd</a>
+                  <!-- <button class="button">Pobierz</button> -->
+                </div>
+              </article>
+              {% endfor %}
             </div>
-          </article>
-        </div>
+          </div>
+        </article>
       </div>
+
     </div>
   </section>
 
