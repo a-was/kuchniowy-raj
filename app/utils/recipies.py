@@ -36,6 +36,7 @@ def get_recipes_list(checked=None):
         LEFT JOIN users u USING(user_id)
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
+        ORDER BY r.creation_date DESC
     """
     if checked is True:
         return query_db_object(sql + " WHERE checked = 1")
@@ -96,6 +97,7 @@ def search_recipes(name, type_, checked=None):
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
         WHERE {} LIKE '%{}%'
+        ORDER BY r.creation_date DESC
     """.format(d[type_], name)
 
     if checked is True:
