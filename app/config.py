@@ -9,7 +9,6 @@ class Config:
     USERNAME_REGEX = r'^[a-zA-Z0-9]{4,12}$'
     PASSWORD_REGEX = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?]).{8,16}$'  # Pa$$w0rd
     RECIPE_NAME_REGEX = r'^[a-zA-Z0-9 -\/!():\'".,?]{5,30}$'
-    RECIPE_DESCRIPTION_REGEX = r'.{50,5000}'
 
     PERMANENT_SESSION_LIFETIME = timedelta(hours=12)
 

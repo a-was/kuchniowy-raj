@@ -40,9 +40,8 @@ def set_user(user_id):
 def new_user(username, password, sex, cooking_level):
     query_db("""
         INSERT INTO users (username, password, sex, role_id, cooking_level_id) 
-        VALUES (?, ?, ?,
-            (SELECT role_id FROM roles WHERE name LIKE 'User'), 
-            (SELECT cooking_level_id FROM cooking_levels WHERE name = ? )
+        VALUES (?, ?, ?, ?,
+            (SELECT role_id FROM roles WHERE name LIKE 'User') 
         )
     """, username, generate_password_hash(password), sex, cooking_level, commit=True)
 

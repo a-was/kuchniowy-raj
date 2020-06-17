@@ -92,7 +92,6 @@ def register():
 
     u.new_user(user_login, user_password1, user_sex, user_cooking_level)
     add_user_to_session(user_login)
-    # return redirect(url_for('.index', recipes=r.get_recipes_list(True), daily_recipe=r.get_daily_recipe()))
     return redirect(url_for('.index'))
 
 
@@ -115,16 +114,6 @@ def user_profile():
         return render_template('profil.html', msg=error_message('Podane hasło nie spełnia wymogów bezpieczeństwa'))
     return render_template('profil.html', msg=success_message('Hasło zaktualizowane'))
 
-
-# @app.route('/reset-password', methods=['GET', 'POST'])
-# @f.login_required
-# def reset_password():
-#     if request.method == 'GET':
-#         return render_template('register.html')
-#
-#     password = request.form['password']
-#     f.change_password(session['user']['username'], password)
-#     return redirect(url_for('user'))
 
 @app.route('/admin')
 @login_required
@@ -178,7 +167,6 @@ def new_recipe():
     recipe_food_category = request.form.get('category')
     recipe_time_required = request.form.get('time')
     recipe_description = request.form.get('description')
-    # recipe_level = request.form.get('cooking_level')
 
     if any(v is None or v == '' for v in [recipe_name, recipe_type, recipe_food_category, recipe_time_required,
                                           recipe_description]):
@@ -208,8 +196,7 @@ def new_recipe():
                                msg=error_message('Przepis o takiej nazwie już istnieje'),
                                food_categories=food_categories,
                                types_of_food=types_of_food)
-
-    if not r.validate_description(recipe_description):
+    if not 50 < len(recipe_description) < 5000:
         return render_template('dodaj_przepis.html',
                                msg=error_message('Opis powinien mieć od 50 do 5000 znaków'),
                                food_categories=food_categories,
