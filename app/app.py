@@ -20,7 +20,8 @@ def create_app():
 
 def init_blueprints(application):
     from app.routes import app as main
-    for blueprint in [main, ]:
+    from app.template_filter import app as template_filter
+    for blueprint in [main, template_filter, ]:
         application.register_blueprint(blueprint)
 
 
