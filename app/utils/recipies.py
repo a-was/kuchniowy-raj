@@ -36,14 +36,14 @@ def get_recipes_list(checked=None):
         LEFT JOIN users u USING(user_id)
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
-        ORDER BY r.creation_date DESC
+        
     """
     if checked is True:
-        return query_db_object(sql + " WHERE checked = 1")
+        return query_db_object(sql + " WHERE checked = 1 ORDER BY r.creation_date DESC")
     elif checked is False:
-        return query_db_object(sql + " WHERE checked = 0")
+        return query_db_object(sql + " WHERE checked = 0 ORDER BY r.creation_date DESC")
     else:
-        return query_db_object(sql)
+        return query_db_object(sql + " ORDER BY r.creation_date DESC")
 
 
 def get_recipe(recipe_id):
@@ -97,15 +97,14 @@ def search_recipes(name, type_, checked=None):
         INNER JOIN types_of_food tf USING(type_of_food_id)
         INNER JOIN food_categories fc USING(food_category_id)
         WHERE {} LIKE '%{}%'
-        ORDER BY r.creation_date DESC
     """.format(d[type_], name)
 
     if checked is True:
-        return query_db_object(sql + " AND checked = 1")
+        return query_db_object(sql + " AND checked = 1 ORDER BY r.creation_date DESC")
     elif checked is False:
-        return query_db_object(sql + " AND checked = 0")
+        return query_db_object(sql + " AND checked = 0 ORDER BY r.creation_date DESC")
     else:
-        return query_db_object(sql)
+        return query_db_object(sql + " ORDER BY r.creation_date DESC")
 
 
 # daily
