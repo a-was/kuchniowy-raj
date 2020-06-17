@@ -82,7 +82,7 @@
                   </a>
                 <h2 class="subtitle"><small>@{{ recipe.username }}</small></h2>
                 <br>
-                {{ recipe.description  }}
+                {{ recipe.description | newline_to_br }}
                 </p>
               </div>
             </div>
