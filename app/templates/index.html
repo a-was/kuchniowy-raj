@@ -74,152 +74,150 @@
 
   <div class="hero">
     <img src="/static/img/index_background.png" />
-  </div>
 
 
 
-  <!--przepisy-->
 
+    <!--przepisy-->
 
-  <div class="columns">
-    <div class="column is-two-thirds">
-      <article class="panel is-primary">
+    <div class="columns">
+      <div class="column">
+        <article class="panel is-primary">
 
-        <div class="panel-heading">
-          <div class="media">
-            <div class="media-left">
-              Przepisy
+          <div class="panel-heading">
+            <div class="media">
+              <div class="media-left">
+                Przepisy
+              </div>
+              <div class="media-content">
+              </div>
+              <div class="media-right">
+              </div>
             </div>
-            <div class="media-content">
+          </div>
+
+          <!-- przerwa dla lepszego wyglądu-->
+          <div class="panel-block">
+            <div class="tabs is-centered">
+            </div>
+          </div>
+
+          {% for recipe in recipes %}
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-96x96">
+                <img src="/static/img/logo.png">
+              </p>
+            </figure>
+            <div class="media-content recipe">
+              <div class="content">
+                <p>
+                  <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}"
+                    style="color: inherit"><strong>{{ recipe.name }}</strong>
+                  </a> {% if recipe.username is none %}<small><em>Użytkownik
+                      usunięty</em></small>{% else %}<small>@{{ recipe.username }}</small>{% endif %}
+                  <br>
+                  {{ recipe.description | truncate(50) }}
+                </p>
+              </div>
+              <nav class="level is-mobile">
+                <div class="level-left">
+                  <a class="level-item">
+                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                  </a>
+                  <span style="margin-left: 3px">Wyświetleń: {{ recipe.views }}</span>
+                </div>
+              </nav>
             </div>
             <div class="media-right">
+              <a class="button" href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}">Podgląd</a>
+              <!-- <button class="button">Pobierz</button> -->
             </div>
-          </div>
-        </div>
-
-        <!-- przerwa dla lepszego wyglądu-->
-        <div class="panel-block">
-          <div class="tabs is-centered">
-          </div>
-        </div>
-
-        {% for recipe in recipes %}
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-96x96">
-              <img src="/static/img/logo.png">
-            </p>
-          </figure>
-          <div class="media-content recipe">
-            <div class="content">
-              <p>
-                <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}"
-                  style="color: inherit"><strong>{{ recipe.name }}</strong>
-                </a> {% if recipe.username is none %}<small><em>Użytkownik usunięty</em></small>{% else %}<small>@{{ recipe.username }}</small>{% endif %}
-                <br>
-                {{ recipe.description | truncate(50) }}
-              </p>
-            </div>
-            <nav class="level is-mobile">
-              <div class="level-left">
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                </a>
-                <span style="margin-left: 3px">Wyświetleń: {{ recipe.views }}</span>
-              </div>
-            </nav>
-          </div>
-          <div class="media-right">
-            <a class="button" href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}">Podgląd</a>
-            <!-- <button class="button">Pobierz</button> -->
-          </div>
+          </article>
+          {% endfor %}
         </article>
-        {% endfor %}
-      </article>
-    </div>
-
-    <div class="column">
-
-      <article class="panel is-link">
-        <p class="panel-heading">
-          Przepis dnia
-        </p>
-        <div class="panel-block">
-          Codziennie inny losowy przepis.
-        </div>
-
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-128x128">
-              <img src="/static/img/logo.png">
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <a href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}"
-                  style="color: inherit"><strong>{{ daily_recipe.name }}</strong></a>
-                {% if daily_recipe.username is none %}
-                    <small><em>Użytkownik usunięty</em></small>
-                {% else %}
-                    <small>@{{ daily_recipe.username }}</small>
-                {% endif %}
-                <br>
-                {{ daily_recipe.description | truncate(25) }}
-              </p>
-            </div>
-          </div>
-          <div class="media-right">
-            <a class="button" href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}">Podgląd</a>
-            <!-- <button class="button">Pobierz</button> -->
-          </div>
-        </article>
-      </article>
-
-
-      <div class="column">
-        <br>
       </div>
+      <div class="column is-one-third">
+        <div class="column">
+
+          <article class="panel is-link">
+            <p class="panel-heading">
+              Przepis dnia
+            </p>
+            <div class="panel-block">
+              Codziennie inny losowy przepis.
+            </div>
+
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-128x128">
+                  <img src="/static/img/logo.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <a href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}"
+                      style="color: inherit"><strong>{{ daily_recipe.name }}</strong></a>
+                    {% if daily_recipe.username is none %}
+                    <small><em>Użytkownik usunięty</em></small>
+                    {% else %}
+                    <small>@{{ daily_recipe.username }}</small>
+                    {% endif %}
+                    <br>
+                    {{ daily_recipe.description | truncate(25) }}
+                  </p>
+                </div>
+              </div>
+              <div class="media-right">
+                <a class="button" href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}">Podgląd</a>
+                <!-- <button class="button">Pobierz</button> -->
+              </div>
+            </article>
+          </article>
+
+
+          <div class="column">
+            <br>
+          </div>
 
 
 
 
-      <article class="panel is-info">
+          <article class="panel is-info">
 
 
-        <p class="panel-heading">
-          Wyszukiwanie przepisu
-        </p>
+            <p class="panel-heading">
+              Wyszukiwanie przepisu
+            </p>
 
-        <div class="tabs is-centered">
-
-
-        </div>
+            <div class="tabs is-centered">
 
 
+            </div>
 
-        <section class="section">
-          <div class="container has-text-centered">
             <div class="columns">
 
-              <form method="GET" action="/szukaj">
-                <div class="columns">
-                  <div class="column is-two-fifths">
-                    <div class="control">
-                      <input class="input" type="text" placeholder="Wyszukaj przepisu" name="q">
-                    </div>
-                    <div class="control">
-                      <input class="input" type="hidden" name="typ" value="nazwa">
-                    </div>
-                    </br>
-                    <div class="field">
-                      <button class="button is-info is-rounded">Szukaj po nazwie</button>
-                    </div>
+              <div class="column">
+                Pierwsza
+                <form method="GET" action="/szukaj">
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Wyszukaj przepisu" name="q">
                   </div>
-              </form>
+                  <div class="control">
+                    <input class="input" type="hidden" name="typ" value="nazwa">
+                  </div>
+                  </br>
+                  <div class="field">
+                    <button class="button is-info is-rounded">Szukaj po nazwie</button>
+                  </div>
+                </form>
+              </div>
 
-              <form method="GET" action="/szukaj">
-                <div class="column">
+
+              <div class="column">
+                druga
+                <form method="GET" action="/szukaj">
                   <div class="control">
                     <div class="select is-primary">
                       <select name="q">
@@ -228,19 +226,19 @@
                         {% endfor %}
                       </select>
                     </div>
-                    <div class="control">
-                      <input class="input" type="hidden" name="typ" value="typ">
-                    </div>
+                  </div>
+                  <div class="control">
+                    <input class="input" type="hidden" name="typ" value="typ">
                   </div>
                   </br>
-                  <div class="field">
+                  <div class="field is-centered">
                     <button class="button is-info is-rounded">Szukaj po typie</button>
                   </div>
-                </div>
-              </form>
-
-              <form method="GET" action="/szukaj">
-                <div class="column">
+                </form>
+              </div>
+              <div class="column">
+                Third column
+                <form method="GET" action="/szukaj">
                   <div class="control">
                     <div class="select is-primary">
                       <select name="q">
@@ -257,15 +255,12 @@
                   <div class="field">
                     <button class="button is-info is-rounded">Szukaj po kategorii</button>
                   </div>
-                </div>
-              </form>
-
+                </form>
+              </div>
             </div>
-          </div>
-        </section>
-      </article>
-    </div>
-  </div>
+          </article>
+        </div>
+
 
 
         <!--ostatnie przepisy-->
@@ -397,22 +392,22 @@
           </div>
         </article>
       -->
-    
 
-
-  <!--Stopka-->
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        <strong>WITKWINTNIE DANIE</strong>
-      <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
-      </br>
-      <p>Projekt dostępny na,
-        <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
-      </p>
-      </p>
+      </div>
     </div>
-  </footer>
+    <!--Stopka-->
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>WITKWINTNIE DANIE</strong>
+        <p>Jakub Kulikowski, Adam Żywica, Adam Wasilewski, Piotr Sumiński, Piotr Król. </p>
+        </br>
+        <p>Projekt dostępny na,
+          <a href="https://github.com/a-was/kuchniowy-raj">githubie</a>.
+        </p>
+        </p>
+      </div>
+    </footer>
 
 
 </body>
