@@ -80,7 +80,13 @@
                   <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}" style="color: inherit">
                     <h1 class="title"><strong>{{ recipe.name }}</strong></h1>
                   </a>
-                <h2 class="subtitle"><small>@{{ recipe.username }}</small></h2>
+                <h2 class="subtitle">
+                  {% if recipe.username is none %}
+                    <small><em>Użytkownik usunięty</em></small>
+                  {% else %}
+                    <small>@{{ recipe.username }}</small>
+                  {% endif %}
+              </h2>
                 <br>
                 {{ recipe.description | newline_to_br }}
                 </p>

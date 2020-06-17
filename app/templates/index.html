@@ -115,7 +115,7 @@
               <p>
                 <a href="{{ url_for('main.get_recipe', recipe_id=recipe.recipe_id) }}"
                   style="color: inherit"><strong>{{ recipe.name }}</strong>
-                </a> <small>@{{ recipe.username }}</small>
+                </a> {% if recipe.username is none %}<small><em>Użytkownik usunięty</em></small>{% else %}<small>@{{ recipe.username }}</small>{% endif %}
                 <br>
                 {{ recipe.description | truncate(50) }}
               </p>
@@ -159,7 +159,11 @@
               <p>
                 <a href="{{ url_for('main.get_recipe', recipe_id=daily_recipe.recipe_id) }}"
                   style="color: inherit"><strong>{{ daily_recipe.name }}</strong></a>
-                <small>@{{ daily_recipe.username }}</small>
+                {% if daily_recipe.username is none %}
+                    <small><em>Użytkownik usunięty</em></small>
+                {% else %}
+                    <small>@{{ daily_recipe.username }}</small>
+                {% endif %}
                 <br>
                 {{ daily_recipe.description | truncate(25) }}
               </p>
